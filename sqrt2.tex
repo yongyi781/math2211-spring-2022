@@ -1,0 +1,52 @@
+\documentclass[12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+
+\title{Examples of proofs that $\sqrt{2}$ is irrational}
+\author{MATH2211 Spring 2022}
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+    \item Assume that $\sqrt2=\frac{a}{b}$ where $a,b\in\mathbb Z^+$. Also assume $\gcd(a,b)=1$. Then we have
+    \[\frac{a^2}{b^2}=2,\]
+    so $a^2=2b^2$. This equation implies that $a^2$ is even because $2b^2$ is even. Therefore, $a$ is even. Let $a=2k$ for some positive integer $k$. Then $a^2=2b^2$ can be rewritten as
+    \[(2k)^2=2b^2\]
+    or
+    \[4k^2=2b^2\]
+    or
+    \[2k^2=b^2.\]
+    Therefore, $b$ is even. Therefore, $a$ and $b$ are both even, which contradicts $\gcd(a,b)=1$.
+
+    \item Assume that $\sqrt2=\frac{a}{b}$ where $a,b\in\mathbb Z^+$. Let $S$ be the set of all pairs of positive integers $(a,b)$ such that $a/b=\sqrt2$. If $S$ is empty, then we're done. Assume $S$ is nonempty. Pick some $(a,b)\in S$. Then we have
+    \[\frac{a^2}{b^2}=2,\]
+    so $a^2=2b^2$. This equation implies that $a^2$ is even because $2b^2$ is even. Therefore, $a$ is even. Let $a=2k$ for some positive integer $k$. Then $a^2=2b^2$ can be rewritten as
+    \[(2k)^2=2b^2\]
+    or
+    \[4k^2=2b^2\]
+    or
+    \[2k^2=b^2.\]
+    Therefore, $b$ is even. Therefore, $a$ and $b$ are both even. Therefore, $a/2$ and $b/2$ are both positive integers and $(a/2, b/2)\in S$. Repeat this argument on $(a/2,b/2)$ to conclude that $a/2$ and $b/2$ are themselves even, so $(a/4,b/4)\in S$. This can be repeated forever, producing an infinite decreasing sequence of positive integers $a, a/2, a/4, a/8, \dots$. This is impossible, so $\sqrt2$ is irrational. (This is called proof by infinite descent.)
+
+    \item We know that $x^2-2$ has $\pm\sqrt2$ as roots. Let's apply the rational root theorem to $x^2-2$. The theorem says that if $a/b$ (in lowest terms) is a root of $x^2-2$, then $a$ divides 2 and $b$ divides 1. In other words, the only possible rational roots of $x^2-2$ are
+    \[\{-2,-1,1,2\}.\]
+    Now, $(-2)^2-2=2\neq0$. $(-1)^2-2=-1\neq 0$. $1^2-2=-1\neq 0$. $2^2-2=2\neq0$. Therefore, $x^2-2$ has no rational roots. So $\sqrt2$ is irrational.
+
+    \item Assume that $\sqrt2=\frac{a}{b}$ where $a,b\in\mathbb Z^+$. Let $S$ be the set of all pairs of positive integers $(a,b)$ such that $a/b=\sqrt2$. If $S$ is empty, then we're done. Assume $S$ is nonempty. Pick some $(a,b)\in S$. Then we have
+    \[\frac{a^2}{b^2}=2,\]
+    so $a^2=2b^2$. Now we compute
+    \begin{align*}
+        (2b-a)^2 &= 4b^2-4ab+a^2\\
+        &= 6b^2-4ab.
+    \end{align*}
+    We also compute
+    \begin{align*}
+        (a-b)^2 &= a^2-2ab+b^2\\
+        &= 3b^2-2ab.
+    \end{align*}
+    Therefore, $(2b-a)^2=2(a-b)^2$. Therefore, $(2b-a,a-b)\in S$. Moreover, $a-b<b$ because $1<\sqrt2< 2$, which implies $b< \sqrt 2b< 2b$, which implies $b< a< 2b$, which implies $0< a-b< b$. So again contradiction by infinite descent.
+\end{enumerate}
+
+\end{document}
