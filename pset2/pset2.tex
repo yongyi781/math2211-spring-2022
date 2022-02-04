@@ -1,0 +1,66 @@
+\documentclass[11pt,oneside]{amsart}
+\usepackage{geometry}
+\usepackage{amssymb,parskip}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bZ}{\mathbb{Z}}
+\DeclareMathOperator{\Span}{span}
+
+\title{MATH2211 Spring 2022\\
+Problem Set 2}
+\author{Due Wednesday, February 9 2022 at 11:59 pm}
+
+\begin{document}
+    \maketitle
+
+    \begin{problem}
+        Compute the real and imaginary parts of $\dfrac{\pi+i}{5-i}$.
+    \end{problem}
+
+    \begin{problem}
+        \hfill\begin{enumerate}[(a)]
+            \item Use power series expansions to prove Euler's formula\footnote{If you don't remember what the power series of $\exp,\sin$, and $\cos$ are, you can look them up on the internet.}
+            \[e^{i\theta}=\cos\theta+i\sin\theta.\]
+            \item Use Euler's formula to prove the identity
+            \[\sin(\theta_1+\theta_2)=\sin(\theta_1)\cos(\theta_2)+\cos(\theta_1)\sin(\theta_2).\]
+            \item Use the same technique to derive a formula for $\cos(3\theta)$ in terms of $\cos\theta$.\footnote{This can be generalized to $\cos(n\theta)$: look up \emph{Chebyshev polynomials of the first kind} on the internet.}
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        Let $z=e^{\frac{2\pi i}n}$, where $n\in\bZ^+$. Prove that $1+z+z^2+\cdots+z^{n-1}=0$.\footnote{Hint: Factor the polynomial $x^n-1$.}
+    \end{problem}
+
+    \begin{problem}
+        Read up about Fermat's little theorem by looking it up on the internet. Using Fermat's little theorem, find the roots of $x^{10}-1$ over $\bF_{11}$.
+    \end{problem}
+
+    \begin{problem}
+        \hfill\begin{enumerate}[(a)]
+            \item Is $U=\{(x_1,x_2,x_3)\in\bC^3:x_1+2x_2+3x_3=0\}$ a subspace of $\bC^3$?
+            \item Is $U=\{(x_1,x_2,x_3)\in\bQ^3:x_1x_2x_3=0\}$ a subspace of $\bQ^3$?
+            \item Let $P$ be the $\bR$-vector space of all polynomials with real coefficients. is
+            \[U=\{f\in P:f'(-1)=3f(2)\}\]
+            a subspace of $P$? Here, $f'$ means the derivative of $f$.
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        \hfill \begin{enumerate}[(a)]
+            \item Is $w=\begin{pmatrix}1\\-1\\0\end{pmatrix}\in\bC^3$ a linear combination of $\begin{pmatrix}1\\1\\-i\end{pmatrix},\begin{pmatrix}2\\1\\0\end{pmatrix}$, and $\begin{pmatrix}1\\0\\i\end{pmatrix}$?
+            \item In the real vector space consisting of all polynomials with real coefficients, is
+            \[x+1\in\Span\{x^2+1,x^3+x,2x^2+x,x+3\}?\]
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        Show that a subset $W$ of a vector space is a subspace if and only if $\Span(W)=W$.
+    \end{problem}
+\end{document}

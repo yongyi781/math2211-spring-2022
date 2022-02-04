@@ -1,0 +1,184 @@
+\documentclass[11pt,oneside]{amsart}
+\usepackage{geometry}
+\usepackage{amssymb,parskip}
+\usepackage[shortlabels]{enumitem}
+\usepackage[most]{tcolorbox}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+
+\definecolor{sol}{rgb}{0.1, 0.3, 0.6}
+
+\newtcolorbox{solution}{enhanced, breakable, colframe=sol, title=Solution}
+\newtcolorbox{rubric}{colframe=purple, title=Rubric}
+
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bZ}{\mathbb{Z}}
+\let\Re\relax
+\let\Im\relax
+\DeclareMathOperator{\Re}{Re}
+\DeclareMathOperator{\Im}{Im}
+
+\title{MATH2211 Spring 2022\\
+Problem Set 1 Solutions}
+
+\begin{document}
+    \maketitle
+
+    \begin{problem}
+        Let $S$ be a set and let $A,B,C\subseteq S$. Prove that $(A\cup B)\cap C=(A\cap C)\cup(B\cap C)$.
+    \end{problem}
+    \begin{solution}
+        Let $x\in (A\cup B)\cap C$. This means that $x\in A\cup B$ and $x\in C$, i.e.\ ($x\in A$ or $x\in B$) and $x\in C$. If $x\in A$, then $x\in A\cap C$. If $x\in B$, then $x\in B\cap C$. Therefore, $(A\cup B)\cap C\subseteq (A\cap C)\cup (B\cap C)$.
+
+        In the other direction, suppose $x\in (A\cap C)\cup (B\cap C)$. In other words, $x\in A\cap C$ or $x\in B\cup C$. In either case, $x\in C\cup B$ and $x\in C$, so $x\in (A\cup B)\cap C$. Hence $(A\cup B)\cap C\supseteq (A\cap C)\cup(B\cap C)$.
+    \end{solution}
+
+    \begin{problem}
+        Show that the set of real numbers of the form $a+b\sqrt2$, where $a,b\in\bQ$, with addition and multiplication as in $\bR$, is a field.
+    \end{problem}
+    \begin{solution}
+        Let's call this set $K$. Since we are using the addition and multiplication from $\bR$, many of the properties are inherited. More specifically, commutativity, associativity, and distributivity are automatically true. We just need to make sure that the sum and product of any two elements in $K$ are in $K$, that 0 and 1 are in $K$, and that additive and multiplicative inverses of elements in $K$ (besides 0) are in $K$.
+        
+        Let us check that the sum and product of any two elements of $K$ are still in $K$. For $a+b\sqrt2\in K$ and $c+d\sqrt2\in K$, we have
+        \[(a+b\sqrt2)+(c+\sqrt2)=(a+c)+(b+d)\sqrt2\in K.\]
+        Similarly, for products, for any $a+b\sqrt2\in K$ and $c+d\sqrt2\in K$, we have
+        \[(a+b\sqrt2)(c+d\sqrt2)=(ac+2bd)+(bc+ad)\sqrt2\in K.\]
+        The numbers 0 and 1 are $0+0\sqrt2$ and $1+0\sqrt2$, which are both in $K$. The additive inverse of $a+b\sqrt2\in K$ is $-a-b\sqrt2$, which is in $K$. The multiplicative inverse is the most nontrivial part of this problem. Let $0\neq a+b\sqrt2\in K$. Over $\bR$, the multiplicative inverse of $a+b\sqrt2$ can be worked out to be
+        \[\frac 1{a+b\sqrt2}\cdot\frac{a-b\sqrt2}{a-b\sqrt2}=\frac{a-b\sqrt2}{a^2-2b^2}=\frac a{a^2-2b^2}+\frac{-b}{a^2-2b^2}\sqrt2,\]
+        and the denominators are nonzero because $a^2-2b^2$ is never 0. (Otherwise, $\sqrt2$ would be rational!) Therefore $(a+b\sqrt2)^{-1}\in K$. This concludes the proof.
+    \end{solution}
+
+    \begin{problem}
+        Define the Fibonacci numbers $F_0,F_1,F_2,\dots$ by $F_0=0,F_1=1$, and $F_n=F_{n-1}+F_{n-2}$ for $n\geq 2$.
+        \begin{enumerate}[(a)]
+            \item Use induction to prove that $F_1+\cdots+F_n=F_{n+2}-1$.
+            \begin{solution}
+                The base case is $n=1$, for which the statement says $F_1=F_3-1$, which is true because $F_1=1$ and $F_3=2$.
+
+                Now let $n\geq 2$. We may assume we've proved that $F_1+\cdots+F_k=F_{k+2}-1$ for all $1\leq k\leq n-1$. (In fact as we will see, we only need the $n-1$ case.) We have
+                \[F_1+\cdots+F_n=(F_1+\cdots+F_{n-1})+F_n=(F_{n+1}-1)+F_n=F_{n+2}+1,\]
+                completing the induction.
+            \end{solution}
+            \item Use induction to prove that $F_1+F_3+F_5+\cdots+F_{2n-1}=F_{2n}$.
+            \begin{solution}
+                Here is a solution that uses the previous result and avoids use of induction. Write $F_3$ as $F_1+F_2$, $F_5$ as $F_3+F_4$, and so on. The left hand side of the equation is now
+                \[F_1+F_1+F_2+F_3+\cdots+F_{2n-2},\]
+                which is equal to $F_1+F_{2n}-1$ by part (a). This is equal to $F_{2n}$, so we're done.
+            \end{solution}
+            \begin{solution}
+                We can also use induction here if we want. The base case is $n=1$, which reads $F_1=F_2$, which is true since $F_1=F_2=1$.
+
+                Now let $n\geq 2$ and assume we've proved that $F_1+F_3+\cdots+F_{2k-1}=F_{2k}$ for all $1\leq k\leq n-1$. We can use this to write $F_1+F_3+\cdots+F_{2n-1}$ as $(F_1+F_3+\cdots+F_{2n-3})+F_{2n-1}=F_{2n-2}+F_{2n-1}=F_{2n}$, which completes the induction.
+
+                (Again, we actually only made use of the $k=n-1$ case of the induction hypothesis.)
+            \end{solution}
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        Prove that for every $n\in\bZ^+$
+        \[\frac 1{1^2}+\frac 1{2^2}+\cdots+\frac 1{n^2}\leq 2-\frac 1n.\]
+    \end{problem}
+    \begin{solution}
+        We use induction. The base case is $n=1$, which reads $\frac 1{1^2}\leq 2-\frac 11$, which is true as both sides are equal to 1. Now let $n\geq 2$ and suppose we've proved that $\frac 1{1^2}+\cdots+\frac 1{k^2}\leq 2-\frac 1k$ for all $1\leq k\leq n-1$. Then
+        \[\frac 1{1^2}+\cdots+\frac 1{n^2}=\frac 1{1^2}+\cdots\frac 1{(n-1)^2}+\frac 1{n^2}\leq 2-\frac 1{n-1}+\frac 1{n^2}.\]
+        Now,
+        \[\begin{split}
+            2-\frac 1{n-1}+\frac 1{n^2}&=2-\left(\frac 1{n-1}-\frac 1{n^2}\right)=2-\frac{n^2-n+1}{n^2(n-1)}\\
+            &<2-\frac{n^2-n}{n^2(n-1)} \\
+            &= 2-\frac 1n,
+        \end{split}\]
+        which completes the induction.
+    \end{solution}
+
+    \begin{problem}
+        Suppose that $z_1,z_1\in\bC$. Prove that
+        \begin{enumerate}[(a)]
+            \item $|z_1z_2|=|z_1|\cdot|z_2|$.
+            \begin{solution}
+                Let $z_1=a+bi$ and $z_2=c+di$. Then
+                \[\begin{split}
+                    |z_1z_2| &= |(a+bi)(c+di)| = |(ac-bd)+(ad+bc)i|\\
+                    &=\sqrt{(ac-bd)^2+(bc+ad)^2}\\
+                    &= \sqrt{(ac)^2+(bd)^2+(bc)^2+(ad)^2}.
+                \end{split}\]
+                On the other hand,
+                \[\begin{split}
+                    |z_1|\cdot|z_2|&=\sqrt{a^2+b^2}\sqrt{c^2+d^2}=\sqrt{(a^2+b^2)(c^2+d^2)}\\
+                    &= \sqrt{(ac)^2+(ad)^2+(bc)^2+(bd)^2}.
+                \end{split}\]
+                Both expressions are equal, so we are done.
+            \end{solution}
+            \item $\overline{z_1z_2}=\overline{z_1}\cdot\overline{z_2}$.
+            \begin{solution}
+                Use the same notation as in (a). We have
+                \[\overline{z_1z_2}=\overline{(a+bi)(c+di)}=\overline{(ac-bd)+(ad+bc)i}=(ac-bd)-(ad+bc)i.\]
+                On the other hand,
+                \[\overline{z_1}\cdot\overline{z_2}=(a-bi)(c-di)=(ac-bd)+(-ad-bc)i.\]
+                Both expressions are equal, so we are done.
+            \end{solution}
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}\hfill
+        \begin{enumerate}[(a)]
+            \item Find all complex solutions to $z^4=-1$.
+            \begin{solution}
+                Suppose $z=re^{i\theta}$ is a solution. Then $e^{\pi i}=-1=z^4=r^4e^{4i\theta}$, so $r=1$ and $\pi\equiv 4\theta\pmod{2\pi}$. This gives 4 possible values of $\theta$, namely $\pi/4,3\pi/4,5\pi/4$, and $7\pi/4$. This gives us the solutions
+                \begin{align*}
+                    z &= e^{\frac{\pi i}4}=\frac 1{\sqrt2}+\frac 1{\sqrt2}i,\\
+                    z &= e^{\frac{3\pi i}4}=-\frac1{\sqrt2}+\frac 1{\sqrt2}i,\\
+                    z &= e^{\frac{5\pi i}4} = -\frac1{\sqrt2}-\frac1{\sqrt2}i,\\
+                    z &= e^{\frac{7\pi i}4} = \frac1{\sqrt2}-\frac1{\sqrt2}i.
+                \end{align*} 
+            \end{solution}
+            \item Find all complex solutions to $z^3=i$.
+            \begin{solution}
+                Suppose $z=re^{i\theta}$ is a solution. Then $e^{\frac{\pi i}2}=i=z^3=r^3e^{3i\theta}$, so $r=1$ and $\frac\pi2\equiv 3\theta\pmod{2\pi}$. This gives 3 possible values of $\theta$, namely $\pi/6,5\pi/6$, and $5\pi/6=3\pi/2$. This gives us the solutions
+                \begin{align*}
+                    z &= e^{\frac{\pi i}6}=\frac{\sqrt3}2+\frac12i,\\
+                    z &= e^{\frac{5\pi i}6} = -\frac{\sqrt3}2+\frac12i,\\
+                    z &= e^{\frac{3\pi i}2}=-i.
+                \end{align*} 
+            \end{solution}
+        \end{enumerate}
+        Express your answers both in the form $re^{i\theta}$ and by giving the real and imaginary parts.
+    \end{problem}
+
+    \begin{problem}
+        Suppose $z_1,z_2\in\bC$. Prove the \emph{triangle inequality}
+        \[|z_1+z_2|\leq |z_1|+|z_2|.\]
+    \end{problem}
+    \begin{solution}
+        As both sides of the inequality are nonnegative, squaring both sides preserves the inequality, so it is equivalent to prove that
+        \[|z_1+z_2|^2\leq (|z_1|+|z_2|)^2.\]
+        Let $z_1=a+bi$ and $z_2=c+di$, for some $a,b,c,d\in\bR$. Then
+        \[\begin{split}
+            |z_1+z_2|^2 &= |(a+c)+(b+d)i|^2 = (a+c)^2+(b+d)^2 \\
+            &= a^2+b^2+c^2+d^2+2ac+2bd.
+        \end{split}\]
+        Meanwhile,
+        \[\begin{split}
+            (|z_1|+|z_2|)^2 &= \left(\sqrt{a^2+b^2}+\sqrt{c^2+d^2}\right)^2\\
+            &= a^2+b^2+c^2+d^2+2\sqrt{(a^2+b^2)(c^2+d^2)}.
+        \end{split}\]
+        Therefore, it suffices to prove that $ac+bd\leq \sqrt{(a^2+b^2)(c^2+d^2)}$. If $ac+bd\leq 0$, then we are done as the right hand side is always non-negative. So assume $ac+bd>0$. Then we can square both sides, and it suffices to prove that $(ac+bd)^2\leq (a^2+b^2)(c^2+d^2)$.\footnote{For those with Olympiad experience, you might recognize the Cauchy-Schwarz inequality here.} Equivalently, it suffices to prove
+        \[(a^2+b^2)(c^2+d^2)-(ac+bd)^2\geq 0.\]
+
+        Let us expand everything:
+        \[\begin{split}
+            (a^2+b^2)(c^2+d^2)-(ac+bd)^2 &= a^2c^2+a^2d^2+b^2c^2+b^2d^2-a^2c^2-b^2d^2-2abcd\\
+            &= a^2d^2+b^2c^2-2abcd\\
+            &= (ad-bc)^2\\
+            &\geq 0.
+        \end{split}\]
+        So we have proven the triangle inequality.
+
+        \textbf{Remark:} Interestingly, last equality can be written as
+        \[|z_1|^2|z_2|^2=(\Re(z_1z_2))^2+(\Im(z_1z_2))^2.\]
+        This is the Pythagorean theorem for the complex number $z_1z_2$!
+    \end{solution}
+\end{document}
