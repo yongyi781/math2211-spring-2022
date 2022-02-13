@@ -1,0 +1,177 @@
+\documentclass[11pt,oneside]{amsart}
+\usepackage{geometry}
+\usepackage{amssymb,parskip,mathtools,microtype}
+\usepackage[shortlabels]{enumitem}
+\usepackage[most]{tcolorbox}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+
+\definecolor{sol}{rgb}{0.1, 0.3, 0.6}
+
+\newtcolorbox{solution}{enhanced, breakable, colframe=sol, title=Solution}
+\newtcolorbox{rubric}{colframe=purple, title=Rubric}
+
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bZ}{\mathbb{Z}}
+\newcommand*\colvec[1]{\begin{psmallmatrix}#1\end{psmallmatrix}}
+\newcommand*\dcolvec[1]{\begin{pmatrix}#1\end{pmatrix}}
+
+\DeclareMathOperator{\Span}{span}
+\let\Re\relax
+\DeclareMathOperator{\Re}{Re}
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+
+\title{MATH2211 Spring 2022\\
+Problem Set 2}
+\author{Due Wednesday, February 9 2022 at 11:59 pm}
+
+\begin{document}
+    \maketitle
+
+    \begin{problem}
+        Compute the real and imaginary parts of $\dfrac{\pi+i}{5-i}$.
+    \end{problem}
+    \begin{solution}
+        \[\begin{split}
+            \frac{\pi+i}{5-i} &= \frac{(\pi+i)(5+i)}{5^2+1}\\
+            &= \frac{5\pi-1+(5+\pi)i}{26}.
+        \end{split}\]
+        The real part of this number is $\frac{5\pi-1}{26}$ and the imaginary part of this number is $\frac{5+\pi}{26}$.
+    \end{solution}
+
+    \begin{problem}
+        \hfill\begin{enumerate}[(a)]
+            \item Use power series expansions to prove Euler's formula\footnote{If you don't remember what the power series of $\exp,\sin$, and $\cos$ are, you can look them up on the internet.}
+            \[e^{i\theta}=\cos\theta+i\sin\theta.\]
+            \begin{solution}
+                The power series for $e^z$ is $\sum_{n=0}^\infty \frac{z^n}{n!}$, and the function $e^z$ is equal to its power series for all complex numbers $z$. Therefore, when $z=i\theta$, we have
+                \[\begin{split}
+                    e^{i\theta} &= \sum_{n=0}^\infty \frac{(i\theta)^n}{n!}\\
+                    &= \sum_{n=0}^\infty i^n\frac{\theta^n}{n!}.
+                \end{split}\]
+                When $n=2k$ for some $k\in\bZ$, we have $i^n=(-1)^k$, and when $n=2k+1$ for some $k\in\bZ$, we have $i^n=i(-1)^k$. Splitting the above sum into even and odd terms yields
+                \[\begin{split}
+                    e^{i\theta} &= \sum_{k=0}^\infty (-1)^k\frac{\theta^{2k}}{(2k)!}+i\sum_{k=0}^\infty (-1)^k\frac{\theta^{2k+1}}{(k+1)!}\\
+                    &= \cos\theta+i\sin\theta,
+                \end{split}\]
+                since two terms in the right hand side are the power series for $\cos\theta$ and $i\sin\theta$ respectively.
+            \end{solution}
+            \item Use Euler's formula to prove the identity
+            \[\sin(\theta_1+\theta_2)=\sin(\theta_1)\cos(\theta_2)+\cos(\theta_1)\sin(\theta_2).\]
+            \begin{solution}
+                Noticing that $\sin(\theta_1+\theta_2)=\Im e^{i(\theta_1+\theta_2)}$, we compute
+                \[\begin{split}
+                    e^{i(\theta_1+\theta_2)} &= e^{i\theta_1}e^{i\theta_2}\\
+                    &= (\cos\theta_1+i\sin\theta_1)(\cos\theta_2+i\sin\theta_2)\\
+                    &= (\cos\theta_1\cos\theta_2-\sin\theta_1\sin\theta_2)+i(\cos\theta_1\sin\theta_2+\sin\theta_1\cos\theta_2).
+                \end{split}\]
+                The imaginary part of the last expression is $\cos\theta_1\sin\theta_2+\sin\theta_1\cos\theta_2$, which gives the result.
+            \end{solution}
+            \item Use the same technique to derive a formula for $\cos(3\theta)$ in terms of $\cos\theta$.\footnote{This can be generalized to $\cos(n\theta)$: look up \emph{Chebyshev polynomials of the first kind} on the internet.}
+            \begin{solution}
+                Noticing that $\cos(3\theta)=\Re e^{3i\theta}$, we compute
+                \[\begin{split}
+                    e^{3i\theta} &= (e^{i\theta})^3 =(\cos\theta+i\sin\theta)^3\\
+                    &= \cos^3\theta+3i\cos^2\theta\sin\theta-3\cos\theta\sin^2\theta-i\sin^3\theta\\
+                    &= (\cos^3\theta-3\cos\theta\sin^2\theta)+i(3\cos^2\theta\sin\theta-\sin^3\theta)
+                \end{split}\]
+                The real part of this last expression is $\cos^3\theta-3\cos\theta\sin^2\theta=\cos^3\theta-3\cos\theta(1-\cos^2\theta)=4\cos^3\theta-3\cos\theta$.
+            \end{solution}
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        Let $z=e^{\frac{2\pi i}n}$, where $n\in\bZ^+$. Prove that $1+z+z^2+\cdots+z^{n-1}=0$.\footnote{Hint: Factor the polynomial $x^n-1$.}
+    \end{problem}
+    \begin{solution}
+        Raising $z$ to the $n$th power yields $e^{2\pi i}$, which is 1. Therefore, $z^n-1=0$. On the other hand, $z^n-1$ can be factored as $(z-1)(z^{n-1}+z^{n-2}+\dots+z^2+z+1)$. Since $z-1\neq 0$ (as $z\neq 1$), we must have $z^{n-1}+z^{n-2}+\dots+z^2+z+1=0$.
+    \end{solution}
+
+    \begin{problem}
+        Read up about Fermat's little theorem by looking it up on the internet. Using Fermat's little theorem, find the roots of $x^{10}-1$ over $\bF_{11}$.
+    \end{problem}
+    \begin{solution}
+        Fermat's little theorem says that for all integers $n$ and all primes $p$, we have $n^p\equiv n\pmod p$. In other words, $n^p-n$ is divisible by $p$ for all integers $n$ and all primes $p$. Furthermore, when $n$ is not divisible by $p$, the equation $n^p-n\equiv 0\pmod p$ implies that $n^{p-1}-1\equiv 0\pmod p$. (We used the primality of $p$ here, which is actually equivalent to the zero product property of $\bF_p$!)
+        
+        Letting $p=11$, and translating everything from integers to $\bF_{11}$, this says that $x^{10}-1=0$ for all $x\in\bF_{11}\setminus\{0\}$. Moreover, $0^{10}-1=-1\neq 0$. Hence, the polynomial $x^{10}-1$ has all elements of $\bF_{11}$ except 0 as its roots.
+    \end{solution}
+
+    \begin{problem}
+        \hfill\begin{enumerate}[(a)]
+            \item Is $U=\{(x_1,x_2,x_3)\in\bC^3:x_1+2x_2+3x_3=0\}$ a subspace of $\bC^3$?
+            \begin{solution}
+                Yes, $U$ is a subspace of $\bC^3$. To check this, we check that the zero vector is in $U$ (yes). Next we check that if $v=(v_1,v_2,v_3),w=(w_1,w_2,w_3)\in U$, then $v+w\in U$. The hypothesis that $v,w\in U$ is equivalent to the following two hypotheses:
+                \begin{align*}
+                    v_1+2v_2+3v_3 &= 0,\\
+                    w_1+2w_2+3w_3 &= 0.
+                \end{align*}
+                Therefore $(v_1+w_1)+2(v_2+w_2)+3(v_3+w_3)=(v_1+2v_2+3v_3)+(w_1+2w_2+3w_3)=0$ as well. This shows that $v+w=(v_1+w_1,v_2+w_2,v_3+w_3)$ is in $U$.
+
+                Finally, we check that for $v=(v_1,v_2,v_3)\in U$ and $a\in \bC$ that $av\in\bC$. The hypothesis that $v\in U$ is equivalent to the statement that $v_1+2v_2+3v_3=0$. Therefore, $av_1+2av_2+3av_3=a(v_1+2v_2+3v_3)=0$ as well, which shows that $av=(av_1,av_2,av_3)$ is in $U$.
+            \end{solution}
+            \item Is $U=\{(x_1,x_2,x_3)\in\bQ^3:x_1x_2x_3=0\}$ a subspace of $\bQ^3$?
+            \begin{solution}
+                No, $U$ is not a subspace of $\bQ^3$. The elements $(1,1,0)$ and $(0,0,1)$ belong to $U$ but their sum, $(1,1,1)$ does not.
+            \end{solution}
+            \item Let $P$ be the $\bR$-vector space of all polynomials with real coefficients. is
+            \[U=\{f\in P:f'(-1)=3f(2)\}\]
+            a subspace of $P$? Here, $f'$ means the derivative of $f$.
+            \begin{solution}
+                Yes, $U$ is a subspace of $P$. First, the zero function, which we shall name $\operatorname{zero}$, is in $U$, because $\operatorname{zero}'(-1)=0=3\operatorname{zero}(2)$. Next, let $f,g\in U$ and $a\in \bR$. The hypothesis that $f,g\in U$ says that $f'(-1)=3f(2)$ and $g'(-1)=3g(2)$. These two equations imply that $f'(-1)+g'(-1)=3f(2)+3g(2)$. This is the same as saying that $(f+g)'(-1)=3(f+g)(2)$, which is precisely the condition for $f+g$ to be in $U$. Finally, $(af)'(-1)=af'(-1)=3af(2)=3(af)(2)$, so $af\in U$. This verifies all the conditions for $U$ to be a subspace of $P$.
+
+                (We freely used the definition of sum of two functions, as well as the product of a function with a scalar, in this solution.)
+            \end{solution}
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        \hfill \begin{enumerate}[(a)]
+            \item Is $w=\dcolvec{1\\-1\\0}\in\bC^3$ a linear combination of $\begin{pmatrix}1\\1\\-i\end{pmatrix},\begin{pmatrix}2\\1\\0\end{pmatrix}$, and $\begin{pmatrix}1\\0\\i\end{pmatrix}$?
+            \begin{solution}
+                Suppose that $\colvec{1\\-1\\0}=a\colvec{1\\1\\-i}+b\colvec{2\\1\\0}+c\colvec{1\\0\\i}$ for some $a,b,c\in\bC$. In other words, $a,b,c$ solve the system of equations
+                \begin{align*}
+                    a+2b+c &= 1\\
+                    a+b &= -1\\
+                    -ia+ic &= 0.
+                \end{align*}
+                The third equation implies that $c=a$. So the first two equations can now be written in terms of $a$ and $b$ only:
+                \begin{align*}
+                    2a+2b &= 1\\
+                    a+b &= -1.
+                \end{align*}
+                This system has no solution because $a+b=-1$ implies $2a+2b=-2$. Therefore, $(1,-1,0)$ is not a complex linear combination of the three given vectors.
+            \end{solution}
+            \item In the real vector space consisting of all polynomials with real coefficients, is
+            \[x+1\in\Span\{x^2+1,x^3+x,2x^2+x,x+3\}?\]
+            \begin{solution}
+                Suppose that $x+1=a(x^2+1)+b(x^3+x)+c(2x^2+x)+d(x+3)$ for some real numbers $a,b,c,d$. Using the fact that two polynomials are equal iff their coefficients are equal, it follows that $a,b,c,d$ solve the system of equations
+                \begin{align*}
+                    b &= 0\\
+                    a+2c &= 0\\
+                    b+c+d &= 1\\
+                    a+3d &= 1.
+                \end{align*}
+                Therefore, $b=0$ and $a=-2c$. Substituting this into the last two equations, we find that $c,d$ must solve the system of equations
+                \begin{align*}
+                    c+d &= 1\\
+                    -2c+3d &= 1.
+                \end{align*}
+                Using any favorite $2\times 2$ system solving method, we obtain $c=\frac 25$ and $d=\frac 35$ as the unique solution (and therefore $a=-2c=-\frac 45$). This set of values for $a,b,c,d$ is indeed a solution, so $x+1$ is in the span of the four given polynomials.
+            \end{solution}
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        Show that a subset $W$ of a vector space is a subspace if and only if $\Span(W)=W$.
+    \end{problem}
+    \begin{solution}
+        Let $V$ be the unnamed vector space in the problem and first suppose that $W$ is a subspace of $V$. We know that $\Span(W)$ is the smallest subspace of $W$ containing every element of $W$ (we proved this characterization in class). But $W$ is such a subspace, so $\Span(W)\subseteq W$. We also have $\Span(W)\supseteq W$ since $\Span(W)$ is supposed to contain every element of $W$. Therefore, $\Span(W)=W$.
+
+        Now suppose that $\Span(W)=W$. In class we proved that the span of any subset of $V$ is a subspace of $V$. Therefore, by the equation $\Span(W)=W$, it follows that $W$ is a subspace of $V$.
+    \end{solution}
+\end{document}

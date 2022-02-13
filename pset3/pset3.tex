@@ -1,0 +1,65 @@
+\documentclass[11pt,oneside]{amsart}
+\usepackage{geometry}
+\usepackage{amssymb,parskip,mathtools,microtype}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bZ}{\mathbb{Z}}
+\DeclareMathOperator{\Span}{span}
+
+\title{MATH2211 Spring 2022\\
+Problem Set 3}
+\author{Due Wednesday, February 16 2022 at 11:59 pm}
+
+\begin{document}
+    \maketitle
+
+    Let $F$ be a field and let $V$ be an $F$-vector space.
+
+    \begin{problem}
+        Suppose we are given a list $v_1,\dots,v_n\in V$.
+        \begin{enumerate}[(a)]
+            \item Show that $v_1,\dots,v_n$ are linearly dependent if and only if there is some $1\leq i\leq n$ such that $v_i\in\Span(v_1,\dots,v_{i-1},v_{i+1},\dots,v_n)$ (i.e.\ the span of the list with $v_i$ taken out).
+            \item Show that $v_i\in\Span(v_1,\dots,v_{i-1},v_{i+1},\dots,v_n)$ if and only if
+            \[\Span(v_1,\dots,v_n)=\Span(v_1,\dots,v_{i-1},v_{i+1},\dots,v_n).\]
+            (That is, the span doesn't change when $v_i$ is taken out.)
+        \end{enumerate}
+    \end{problem}
+    
+    \begin{problem}
+        Suppose $v_1,v_2,v_3,v_4\in V$ and set
+        \[w_1=v_1-v_2,\quad w_2=v_2-v_3,\quad w_3=v_3-v_4,\quad w_4=v_4.\]
+        \begin{enumerate}[(a)]
+            \item Show that $\Span(v_1,v_2,v_3,v_4)=\Span(w_1,w_2,w_3,w_4)$.
+            \item Show that $v_1,v_2,v_3,v_4$ are linearly independent if and only if $w_1,w_2,w_3,w_4$ are linearly independent.
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        Suppose that $\{v_1,v_2,\dots,v_n\}$ is linearly independent in $V$. Show that $\{v_1,v_1+v_2,\dots,v_1+v_2+\cdots+v_n\}$ is linearly independent as well.
+    \end{problem}
+
+    \begin{problem}
+        \leavevmode\begin{enumerate}[(a)]
+            \item Show that $V$ is infinite dimensional if and only if it satisfies the following property: for every integer $k>0$, one can find $k$ linearly independent vectors $v_1,\dots,v_k\in V$.
+            \item Show that the vector space $\bR^\infty\coloneqq\{\text{ all sequences }(a_1,a_2,a_3,\dots)\text{ of real numbers}\}$ is infinite dimensional.
+            \item Give an example of a subspace of $\bR^\infty$ which is strictly contained in $\bR^\infty$ but is still infinite dimensional.
+        \end{enumerate}
+    \end{problem}
+
+    \newpage % HACK: prevent isolated problem header
+
+    \begin{problem}
+        For each positive integer $n$, let \[B_n=\{(-1,1,\dots,1),(1,-1,1,\dots,1),\dots,(1,1,\dots,-1)\}\subseteq F^n.\] That is, $B_n$ is the set of vectors in $F^n$ with one component equal to $-1$ and $n-1$ components equal to 1. 
+        \begin{enumerate}[(a)]
+            \item Let $F=\bR$. For which $n$ is $B_n$ a basis of $\bR^n$?\footnote{If you need a hint for where to start, try to check whether the vectors in $B_n$ are linearly independent.}
+            \item Let $F=\bF_3$. Show that if $n$ is of the form $3k+2$ for some $k\in\bZ_{\geq 0}$ (i.e.\ $n\in\{2,5,8,\dots\}$), then $B_n$ is not a basis of $\bF_3^n$.\footnote{Hint: Try to show that $B_n$ is contained in a proper subspace.}
+        \end{enumerate}
+    \end{problem}
+\end{document}
