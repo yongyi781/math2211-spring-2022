@@ -1,0 +1,75 @@
+\documentclass[11pt,oneside]{amsart}
+\usepackage{geometry}
+\usepackage{amssymb,parskip,mathtools,microtype}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bZ}{\mathbb{Z}}
+\newcommand*\colvec[1]{\begin{psmallmatrix}#1\end{psmallmatrix}}
+\newcommand*\dcolvec[1]{\begin{pmatrix}#1\end{pmatrix}}
+
+\DeclareMathOperator{\Span}{span}
+\let\Re\relax
+\DeclareMathOperator{\Re}{Re}
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+
+\title{MATH2211 Spring 2022\\
+Problem Set 4}
+\author{Due Wednesday, February 23 2022 at 11:59 pm}
+
+\begin{document}
+    \maketitle
+
+    Useful reading for this problem set: Axler pages 20-23 (Sums of subspaces), Axler page 47 (Dimension of a sum and proof)
+
+    \begin{problem}
+        For each $c\in\bR$, determine the dimension of
+        \[U=\Span\left( \dcolvec{2\\3\\1},\dcolvec{1\\-1\\2},\dcolvec{7\\3\\c} \right).\]
+    \end{problem}
+
+    \begin{problem}
+        Suppose that $U$ and $W$ are 4-dimensional $\bC$-subspaces of $\bC^6$. Show that one can find two vectors in $U\cap W$, neither of which is a scalar multiple of the other.\footnote{Hint: the existence of such two vectors is precisely equivalent to a simple dimension condition on $U\cap W$. Can you see it?}
+    \end{problem}
+
+    \begin{problem}
+        \leavevmode\begin{enumerate}[(a)]
+            \item Find a basis for the subspace
+            \[U=\{(x_1,x_2,x_3,x_4)\in\bR^4:x_1+x_2=0\text{ and }x_3-x_4=0\}\]
+            and extend it to a basis of $\bR^4$.
+
+            \item Let $P_5(\bR)$ be the vector space of all polynomials of degree at most 5 with real coefficients. Find a basis for the subspace
+            \[U=\{f(x)\in P_5(\bR):f(1)=0\text{ and }f(2)=0\}\]
+            and extend it to a basis of $P_5(\bR)$.
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        Given subspaces $U_1,U_2\subseteq V$, prove that the following properties are equivalent.
+        \begin{itemize}
+            \item $V=U_1+U_2$ and $\{0\}=U_1\cap U_2$.
+            \item Every vector $v\in V$ can be written in a \textbf{unique} way as $v=u_1+u_2$ with $u_1\in U_1$ and $u_2\in U_2$.
+        \end{itemize}
+        When these hold, we say that $V$ is the \emph{direct sum} of $U_1$ and $U_2$, and write $V=U_1\oplus U_2$.
+    \end{problem}
+
+    \begin{problem}
+        Prove or give a counterexample: if $f\colon A\to B$ and $g\colon B\to C$ are invertible functions, then $g\circ f\colon A\to C$ is also invertible.
+    \end{problem}
+    
+    \begin{problem}
+        Suppose $T\colon V\to W$ is a linear map, and $v_1,\dots,v_n\in V$. For each statement, give a proof or a counterexample.
+        \begin{enumerate}[(a)]
+            \item If $T$ is injective and $v_1,\dots,v_n$ are linearly independent, then $T(v_1),\dots,T(v_n)$ are linearly independent.
+            \item If $T(v_1),\dots,T(v_n)$ are linearly independent, then $v_1,\dots,v_n$ are linearly independent.
+            \item If $T$ is surjective and $v_1,\dots,v_n$ span $V$, then $T(v_1),\dots,T(v_n)$ span $W$.
+            \item If $T(v_1),\dots,T(v_n)$ span $W$, then $v_1,\dots,v_n$ span $V$.
+        \end{enumerate}
+    \end{problem}
+\end{document}
