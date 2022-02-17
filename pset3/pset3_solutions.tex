@@ -159,9 +159,11 @@ Problem Set 3 Solutions}
                 \[(n-2)(a_1+\dots+a_n)=0\]
                 says nothing. However, this alone is not enough to conclude that $B_n$ is not a basis, because maybe some other argument might show that $B_n$ is a basis.
 
-                To conclude that $B_n$ is not a basis, it suffices to make the following observation: when $n\equiv 2\pmod 3$, every vector in $B_n$ has the property that the sum of its components is 0. That is,
+                To conclude that $B_n$ is not a basis, it suffices to make the following observation: when $n\equiv 2\pmod 3$, every vector in $B_n$ has the property that the sum of its components is 0. Indeed, each vector has one component equal to $-1$ and $n-1$ components equal to 1, which makes the sum of the components equal to $-1+(n-1)1=n-2=0\in\bF_3$ when $n\equiv 2\pmod 3$. Therefore,
                 \[B_n\subseteq U\coloneqq\{(a_1,\dots,a_n)\in\bF_3^n:a_1+\dots+a_n=0\}.\]
                 Note that $U$ is a vector space, in fact a proper subspace of $\bF_3^n$. It follows that $\Span B_n\subseteq U$ as well. Hence, $B_n$ does not span $\bF_3^n$, so $B_n$ is not a basis of $\bF_3^n$.
+
+                (By the basis theorem, it follows that this set of vectors must be linearly dependent when $n\equiv 2\pmod 3$. Can anyone find an explicit linear relation?)
             \end{solution}
         \end{enumerate}
     \end{problem}
