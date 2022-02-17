@@ -1,0 +1,168 @@
+\documentclass[11pt,oneside]{amsart}
+\usepackage{geometry}
+\usepackage{amssymb,parskip,mathtools,microtype}
+\usepackage[shortlabels]{enumitem}
+\usepackage[most]{tcolorbox}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+
+\definecolor{sol}{rgb}{0.1, 0.3, 0.6}
+
+\newtcolorbox{solution}{enhanced, breakable, colframe=sol, title=Solution}
+\newtcolorbox{rubric}{colframe=purple, title=Rubric}
+
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bZ}{\mathbb{Z}}
+\DeclareMathOperator{\Span}{span}
+
+\title{MATH2211 Spring 2022\\
+Problem Set 3 Solutions}
+
+\begin{document}
+    \maketitle
+
+    Let $F$ be a field and let $V$ be an $F$-vector space.
+
+    \begin{problem}
+        Suppose we are given a list $v_1,\dots,v_n\in V$.
+        \begin{enumerate}[(a)]
+            \item Show that $v_1,\dots,v_n$ are linearly dependent if and only if there is some $1\leq i\leq n$ such that $v_i\in\Span(v_1,\dots,v_{i-1},v_{i+1},\dots,v_n)$ (i.e.\ the span of the list with $v_i$ taken out).
+            \begin{solution}
+                First suppose that $v_1,\dots,v_n$ are linearly dependent. One characterization of linear dependence is that some vector $v_i$ is a linear combination of the other vectors $v_1,\dots,v_{i-1},v_{i+1},\dots,v_n$. Therefore, for this choice of $i$, $v_i\in\Span(v_1,\dots,v_{i-1},v_{i+1},\dots,v_n)$.
+
+                Now suppose that some $v_i$ is in the span of $v_1,\dots,v_{i-1},v_{i+1},\dots,v_n$. This says that the vector $v_i$ is a linear combination of the other vectors in the list. That implies that $v_1,\dots,v_n$ is a linearly dependent set.
+            \end{solution}
+            \item Show that $v_i\in\Span(v_1,\dots,v_{i-1},v_{i+1},\dots,v_n)$ if and only if
+            \[\Span(v_1,\dots,v_n)=\Span(v_1,\dots,v_{i-1},v_{i+1},\dots,v_n).\]
+            (That is, the span doesn't change when $v_i$ is taken out.)
+            \begin{solution}
+                First note that for two subsets $A\subseteq B$ of $V$, $\Span A\leq\Span B$ automatically. So to say that $\Span(v_1,\dots,v_n)=\Span(v_1,\dots,v_{i-1},v_{i+1},\dots,v_n)$ is equivalent to saying that $\Span(v_1,\dots,v_n)\subseteq\Span(v_1,\dots,v_{i-1},v_{i+1},\dots,v_n)$, because the other containment always holds. This in turn is equivalent to saying that every linear combination of $v_1,\dots,v_n$ is also a linear combination of $v_1,\dots,v_{i-1},v_{i+1},\dots,v_n$.
+
+                For one direction, suppose that $v_i\in\Span(v_1,\dots,v_{i-1},v_{i+1},\dots,v_n)$ for some $i$. This says that there exist scalars $a_j\in F$ for $j\in\{1,2,\dots,i-1,i+1,\dots,n\}$ such that $v_i=\sum_{j\in\{1,2,\dots,i-1,i+1,\dots,n\}}a_jv_j$. Now let
+                \[v=b_1v_1+\cdots+b_nv_n\]
+                be an arbitrary element in $\Span(v_1,\dots,v_n)$. By replacing the $b_iv_i$ term with the sum $\sum_{j\in\{1,2,\dots,i-1,i+1,\dots,n\}}b_ia_jv_j$, we can rewrite $v$ as
+                \[v=(b_ia_1+b_1)v_1+\cdots+(b_ia_{i-1}+b_{i-1})v_{i-1}+(b_ia_{i+1}+b_{i+1})v_{i+1}+(b_ia_n+b_n)v_n,\]
+                showing that $v$ is in the span of $v_1,\dots,v_{i-1},v_{i+1},\dots,v_n$.
+
+                For the other direction, suppose that every linear combination of $v_1,\dots,v_n$ is also a linear combination of $v_1,\dots,v_{i-1},v_{i+1},\dots,v_n$. Now it is certainly true that $v_i$ is a linear combination of $v_1,\dots,v_n$, so this says that $v_i$ is also able to be written as a linear combination of $v_1,\dots,v_{i-1},v_{i+1},\dots,v_n$. This shows that $v_i\in\Span(v_1,\dots,v_{i-1},v_{i+1},\dots,v_n)$ and concludes the proof.
+            \end{solution}
+        \end{enumerate}
+    \end{problem}
+    
+    \begin{problem}
+        Suppose $v_1,v_2,v_3,v_4\in V$ and set
+        \[w_1=v_1-v_2,\quad w_2=v_2-v_3,\quad w_3=v_3-v_4,\quad w_4=v_4.\]
+        \begin{enumerate}[(a)]
+            \item Show that $\Span(v_1,v_2,v_3,v_4)=\Span(w_1,w_2,w_3,w_4)$.
+            \begin{solution}
+                As was given, each $w_i$ is a linear combination of the $v_i$. In other words, $w_i\in\Span(v_1,v_2,v_3,v_4)$ for all $i$. Therefore,
+                \[\Span(w_1,w_2,w_3,w_4)\leq\Span(v_1,v_2,v_3,v_4)\]
+                since $\Span(w_1,w_2,w_3,w_4)$ is the smallest subspace of $V$ containing the vectors $w_1,w_2,w_3,w_4$.
+
+                Now we can also write each $v_i$ as a linear combination of the $w_i$ as follows:
+                \[v_1=w_1+w_2+w_3+w_4,\quad v_2=w_2+w_3+w_4,\quad v_3=w_3+w_4,\quad v_4=w_4.\]
+                By the same argument as above, this shows that
+                \[\Span(w_1,w_2,w_3,w_4)\geq\Span(v_1,v_2,v_3,v_4).\]
+                Thus we are done.
+            \end{solution}
+            \item Show that $v_1,v_2,v_3,v_4$ are linearly independent if and only if $w_1,w_2,w_3,w_4$ are linearly independent.
+            \begin{solution}
+                Here is a very neat proof for this problem. We first have the following lemma: A finite set of vectors $S\subseteq V$ is linearly independent if and only if the dimension of $\Span (S)$ is equal to $|S|$. Proof: If $S$ is linearly independent, then $S$ is a basis of $\Span (S)$ since $S$ is linearly independent and $S$ spans $\Span (S)$. Conversely, if $\dim\Span S=|S|$, Corollary 4.26 from the course notes along with the fact that $S$ spans $\Span(S)$ shows that $S$ is a basis of $\Span (S)$, and therefore linearly independent. 
+
+                Using this lemma, we have that $v_1,v_2,v_3,v_4$ are linearly independent iff $\Span(v_1,v_2,v_3,v_4)$ has dimension 4, and the same for $w_1,w_2,w_3,w_4$. Since part (a) proved that
+                \[\Span(v_1,v_2,v_3,v_4)=\Span(w_1,w_2,w_3,w_4),\]
+                it follows that one side has dimension 4 iff the other side has dimension 4. By the lemma, this is the same as saying that $v_1,v_2,v_3,v_4$ is linearly independent iff $w_1,w_2,w_3,w_4$ is linarly independent. This concludes the proof.
+            \end{solution}
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        Suppose that $\{v_1,v_2,\dots,v_n\}$ is linearly independent in $V$. Show that $\{v_1,v_1+v_2,\dots,v_1+v_2+\cdots+v_n\}$ is linearly independent as well.
+    \end{problem}
+    \begin{solution}
+        We know that linear independence of $v_1,\dots,v_n$ says that the only solution to $\sum_i a_iv_i=0$ is $a_i=0$ for all $i$. Now let us suppose that $a_i\in\bR$ satisfies
+        \[a_1v_1+a_2(v_1+v_2)+\dots+a_n(v_1+\dots+v_n)=0.\]
+        Let us rewrite this as
+        \[(a_1+\dots+a_n)v_1+(a_2+\dots+a_n)v_2+\dots+a_nv_n=0.\]
+        By linear independence of $v_1,\dots,v_n$, we see that
+        \begin{align*}
+            a_1+a_2+\dots+a_n &=0,\\
+            a_2+\dots+a_n &=0,\\
+            &\vdots\\
+            a_n &=0.
+        \end{align*}
+        Using back-substitution we find that the only solution to this system is $a_i=0$ for all $i$. Thus, $v_1,v_1+v_2,\dots,v_1+v_2+\dots+v_n$ are linearly independent.
+    \end{solution}
+
+    \begin{problem}
+        \leavevmode\begin{enumerate}[(a)]
+            \item Show that $V$ is infinite dimensional if and only if it satisfies the following property: for every integer $k>0$, one can find $k$ linearly independent vectors $v_1,\dots,v_k\in V$.
+            \begin{solution}
+                Recall that the definition of $V$ being infinite dimensional is that there does not exist a finite basis for $V$.
+
+                For one direction, suppose that $V$ is infinite dimensional. Thus we know that there does not exist a finite basis for $V$. We prove that for every $k>0$ we can find $k$ linearly independent vectors $v_1,\dots,v_k\in V$ by induction. For the base case $k=1$, we can certainly find a nonzero vector in $V$ since $V$ cannot be the zero vector space. Now suppose we have found $k-1$ linearly independent vectors $v_1,\dots,v_{k-1}\in V$. Because $v_1,\dots,v_{k-1}$ is not a basis (because $V$ is not supposed to have a finite basis), but is linearly independent, it must be that they do not span $V$. Hence we can let $v_k$ be any element of $V-\Span(v_1,\dots,v_{k-1})$ to complete the induction.
+
+                Now suppose that $V$ is finite dimensional and has dimension $n$. Then any set of $n+1$ vectors must be linearly dependent. This completes the proof.
+            \end{solution}
+            \item Show that the vector space $\bR^\infty\coloneqq\{\text{ all sequences }(a_1,a_2,a_3,\dots)\text{ of real numbers}\}$ is infinite dimensional.
+            \begin{solution}
+                The sequences $(1,0,0,0,\dots,), (0,1,0,0,\dots), (0,0,1,0,\dots), \ldots$ gives a sequence of linearly independent sequences in $V$. For any integer $k>0$ we can take the first $k$ terms of this sequence to get $k$ linearly independent vectors in $\bR^\infty$. By part (a) it follows that $\bR^\infty$ is infinite dimensional.
+            \end{solution}
+            \item Give an example of a subspace of $\bR^\infty$ which is strictly contained in $\bR^\infty$ but is still infinite dimensional.
+            \begin{solution}
+                Some examples:
+                \begin{itemize}
+                    \item All sequences whose first term is 0.
+                    \item All sequences whose second term is 0.
+                    \item All sequences whose first and 42th term are zero.
+                    \item All sequences whose first through 42nd term are zero.
+                    \item All sequences with finitely many nonzero terms (fun fact: $(1,0,0,0,\dots,), (0,1,0,0,\dots), (0,0,1,0,\dots), \ldots$ is a basis of this space but \textbf{not} a basis of $\bR^\infty$!)
+                \end{itemize}
+                Can you come up with a cool example that is not like these?
+
+                A non-example is the set $S$ of sequences whose terms are integers. This set fails to be closed under scalar multiplication: $0.5\cdot (1,0,\dots,0)=(0.5,0,\dots,0)$ is not in $S$.
+            \end{solution}
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        For each positive integer $n$, let \[B_n=\{(-1,1,\dots,1),(1,-1,1,\dots,1),\dots,(1,1,\dots,-1)\}\subseteq F^n.\] That is, $B_n$ is the set of vectors in $F^n$ with one component equal to $-1$ and $n-1$ components equal to 1. 
+        \begin{enumerate}[(a)]
+            \item Let $F=\bR$. For which $n$ is $B_n$ a basis of $\bR^n$?\footnote{If you need a hint for where to start, try to check whether the vectors in $B_n$ are linearly independent.}
+            \begin{solution}
+                I claim that the set of $n$ for which $B_n$ is a basis of $\bR^n$ is the set of positive integers except 2.
+                
+                For $n=1$, $B_n$ consists of $\{-1\}$ which is clearly linearly independent. For $n=2$, $B_n=\{(-1,1),(1,-1)\}$. These vectors are multiples of each other, so cannot be a basis of $\bR^2$ as they are not linearly independent.
+
+                For $n\geq 3$, we will prove that $B_n$ is linearly independent, which proves that $B_n$ is a basis of $\bR^n$ as $|B_n|=n$. To prove that $B_n$ is linearly independent, let us suppose that $a_1,\dots,a_n\in\bR$ such that
+                \[a_1(-1,1,\dots,1)+a_2(1,-1,1,\dots,1)+\dots+a_n(1,1,\dots,-1)=0.\]
+                This is equivalent to the system of equations
+                \begin{align*}
+                    -a_1+a_2+\dots+a_n &= 0\\
+                    a_1-a_2+\dots+a_n &= 0\\
+                    &\vdots\\
+                    a_1+a_2\dots-a_n &= 0.
+                \end{align*}
+                To solve this system, let's note that if we add these equations together we get
+                \[(n-2)(a_1+\dots+a_n) = 0,\]
+                which implies that $a_1+\dots+a_n=0$, since $n-2\neq 0$ for $n\geq 3$. Now subtracting this last equation by each of the equations in the original system, we see that $2a_i=0$ for all $i$. Hence $a_i=0$ for all $i$ is the only solution to the system, therefore $B_n$ is linearly independent.
+            \end{solution}
+            \item Let $F=\bF_3$. Show that if $n$ is of the form $3k+2$ for some $k\in\bZ_{\geq 0}$ (i.e.\ $n\in\{2,5,8,\dots\}$), then $B_n$ is not a basis of $\bF_3^n$.\footnote{Hint: Try to show that $B_n$ is contained in a proper subspace.}
+            \begin{solution}
+                (Side note: If $n\not\equiv 2\pmod 3$, then $n-2\neq 0$ in $\bF_3$, so everything in the solution to part (a) continues to hold. So in this case, $B_n$ is a basis of $\bF_3^n$. But this argument is not needed because the problem did not ask to show that $B_n$ is a basis when $n\notin\{2,5,8,\dots\}$.)
+                
+                Let $n\equiv 2\pmod 3$. The argument from (a) fails because $n-2=0$, so the equation 
+                \[(n-2)(a_1+\dots+a_n)=0\]
+                says nothing. However, this alone is not enough to conclude that $B_n$ is not a basis, because maybe some other argument might show that $B_n$ is a basis.
+
+                To conclude that $B_n$ is not a basis, it suffices to make the following observation: when $n\equiv 2\pmod 3$, every vector in $B_n$ has the property that the sum of its components is 0. That is,
+                \[B_n\subseteq U\coloneqq\{(a_1,\dots,a_n)\in\bF_3^n:a_1+\dots+a_n=0\}.\]
+                Note that $U$ is a vector space, in fact a proper subspace of $\bF_3^n$. It follows that $\Span B_n\subseteq U$ as well. Hence, $B_n$ does not span $\bF_3^n$, so $B_n$ is not a basis of $\bF_3^n$.
+            \end{solution}
+        \end{enumerate}
+    \end{problem}
+\end{document}
