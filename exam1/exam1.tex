@@ -1,0 +1,65 @@
+\documentclass[11pt,oneside]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amssymb,parskip,mathtools,microtype}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bZ}{\mathbb{Z}}
+\newcommand*\colvec[1]{\begin{psmallmatrix}#1\end{psmallmatrix}}
+\newcommand*\dcolvec[1]{\begin{pmatrix}#1\end{pmatrix}}
+
+\DeclareMathOperator{\Span}{span}
+\let\Re\relax
+\DeclareMathOperator{\Re}{Re}
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+
+\title{MATH2211 Spring 2022\\
+Exam 1}
+\author{Wednesday, March 2 2022}
+
+\begin{document}
+    \maketitle
+
+    Name: \underline{\hspace{6cm}}
+
+    This exam is open notes. There are 50 points total in this exam.
+
+    \begin{problem}
+        \leavevmode\begin{enumerate}[(a)]
+            \item (5 points) Find, with proof, the dimension of
+            \[V\coloneqq\Span\{(1,1,1), (2,2,2), (3,3,3)\}\subseteq\bR^3.\]
+            \vfill
+            \item (5 points) Let $P_2(\bR)$ be the space of polynomials of degree at most 2. Write down the matrix of the derivative operator $\frac {d}{dx}$ from $P_2(\bR)$ to $P_2(\bR)$ with respect to the ordered basis $(1,x,x^2)$ for both the source and target.
+            \vfill
+        \end{enumerate}
+    \end{problem}
+    \newpage
+
+    \begin{problem}
+        (10 points) Find, with proof, all complex numbers $z\in\bC$ such that $z$ and $z^2$ are linearly independent over $\bR$.
+    \end{problem}
+    \vfill
+
+    \begin{problem}
+        (10 points) Prove or disprove: Let $v_1,v_2,v_3$ be a basis of a real vector space $V$. Then the set $\{v_1-v_2,v_2-v_3,v_3-v_1\}$ is also a basis of $V$.
+    \end{problem}
+    \vfill
+    \newpage
+
+    \begin{problem}
+        (10 points) Let $T\colon V\to W$ be a linear transformation between two finite-dimensional $\bR$-vector spaces. Prove that if $T$ is injective, then $\dim V\leq\dim W$.
+    \end{problem}
+    \newpage
+
+    \begin{problem}
+        (10 points) Let $\bR^\infty$ denote the space of infinite sequences of real numbers. For each $n\in\bZ^+$, let $v_n$ be the element $(n,n+1,n+2,n+3,\dots)\in\bR^\infty$. Determine, with proof, the dimension of $\Span(v_1,v_2,v_3,\dots)$.
+    \end{problem}
+    \vfill
+\end{document}

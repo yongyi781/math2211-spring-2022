@@ -1,0 +1,162 @@
+\documentclass[11pt,oneside]{amsart}
+\usepackage{geometry}
+\usepackage{amssymb,parskip,mathtools,microtype}
+\usepackage[shortlabels]{enumitem}
+\usepackage[most]{tcolorbox}
+
+\definecolor{sol}{rgb}{0.1, 0.3, 0.6}
+
+\newtcolorbox{solution}{enhanced, breakable, colframe=sol, title=Solution}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bZ}{\mathbb{Z}}
+\newcommand*\colvec[1]{\begin{psmallmatrix}#1\end{psmallmatrix}}
+\newcommand*\dcolvec[1]{\begin{pmatrix}#1\end{pmatrix}}
+
+\DeclareMathOperator{\Span}{span}
+\let\Re\relax
+\DeclareMathOperator{\Re}{Re}
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+\DeclareMathOperator{\id}{id}
+
+\title{MATH2211 Spring 2022\\
+Problem Set 4}
+\author{Due Wednesday, February 23 2022 at 11:59 pm}
+
+\begin{document}
+    \maketitle
+
+    Useful reading for this problem set: Axler pages 20-23 (Sums of subspaces), Axler page 47 (Dimension of a sum and proof)
+
+    \begin{problem}
+        For each $c\in\bR$, determine the dimension of
+        \[U=\Span\left( \dcolvec{2\\3\\1},\dcolvec{1\\-1\\2},\dcolvec{7\\3\\c} \right).\]
+    \end{problem}
+    \begin{solution}
+        It is clear that the first two vectors are linearly independent. Hence $\dim U$ is either 2 or 3 depending on $c$. Moreover, $\dim U=2$ (the smaller case) iff $(7,3,c)$ is a linear combination of $(2,3,1)$ and $(1,-1,2)$, in other words, there exist $a,b\in\bR$ such that
+        \begin{align*}
+            2a+b &= 7\\
+            3a-b &= 3\\
+            a+2b &= c.
+        \end{align*}
+        Solving the first two equations gives the unique solution $a=2,b=3$. Hence $\dim U=2$ iff $c=2+2\cdot 3=8$. For all other values of $c$, $\dim U=3$.
+    \end{solution}
+
+    \begin{problem}
+        Suppose that $U$ and $W$ are 4-dimensional $\bC$-subspaces of $\bC^6$. Show that one can find two vectors in $U\cap W$, neither of which is a scalar multiple of the other.\footnote{Hint: the existence of such two vectors is precisely equivalent to a simple dimension condition on $U\cap W$. Can you see it?}
+    \end{problem}
+    \begin{solution}
+        Let $\mathcal B_U$ be a basis of $U$, with 4 elements, and let $\mathcal B_W$ be a basis of $W$, again with 4 elements. Since $\bC^6$ is 6-dimensional, the basis $\mathcal B_W$ can contain at most 2 vectors linearly independent from $\mathcal B_U$ (since otherwise we would have 7 or more linearly independent vectors in $\bC^6$). The other two vectors in $\mathcal B_W$ are therefore linear combinations of $\mathcal B_U$ as well, meaning they are in $U$. They are also in $W$ because they were part of a basis of $W$, so they are in $U\cap W$. They are also not scalar multiples of each other because they are linearly independent.
+    \end{solution}
+    \begin{solution}
+        \textbf{Alternative solution (not as nice).} If $U\cap W=\{0\}$, then this says that $\bC^6=U\oplus W$ which implies that $\bC^6$ is 8-dimensional, which is a contradiction. Now assume that $U\cap W$ is one-dimensional, that is, $U\cap W=\bC\cdot v$ for some $v\in\bC^6$. Extend $\{v\}$ to a basis $\{v,u_1,u_2,u_3\}$ of $U$ and similarly extend $\{v\}$ to a basis $\{v,w_1,w_2,w_3\}$ of $W$. There are 7 vectors in $\{v,u_1,u_2,u_3,w_1,w_2,w_3\}$ while $\bC^6$ is 6-dimensional, so there must be some linear dependence
+        \[av+b_1u_1+b_2u_2+b_3u_3+c_1w_1+c_2w_2+c_3w_3=0\]
+        with not all $a,b_i,c_i$ being 0. If some $b_i$ is not equal to 0, then the equation shows that $b_1u_1+b_2u_2+b_3u_3$ is a nonzero vector in $U\cap W$ and not a multiple of $v$ (because $v,u_1,u_2,u_3$ is linearly independent), contradicting that $U\cap W=\bC\cdot v$. Similarly, if some $c_i$ is not equal to 0, then $c_1w_1+c_2w_2+c_3w_3\in U\cap W$ and not a multiple of $v$, again contradicting that $U\cap W=\bC\cdot v$. Therefore all the $b_i$ and $c_i$ are zero, the equation reduces to $av=0$ with $a\neq 0$ and $v\neq 0$, which is again a contradiction.
+
+        Therefore, $U\cap W$ is at least 2-dimensional, and picking any two linearly independent vectors in $U\cap W$ will do.
+    \end{solution}
+    \begin{solution}
+        \textbf{Alternative solution using dimension sum formula.} Using the formula from Axler:
+        \[\dim(U+W)=\dim U+\dim W-\dim(U\cap W),\]
+        and using the inequality $\dim(U+W)\leq 6$, $\dim U=\dim W=4$, we obtain the inequality $\dim(U\cap W)\geq 4+4-6=2$.
+    \end{solution}
+
+    \begin{problem}
+        \leavevmode\begin{enumerate}[(a)]
+            \item Find a basis for the subspace
+            \[U=\{(x_1,x_2,x_3,x_4)\in\bR^4:x_1+x_2=0\text{ and }x_3-x_4=0\}\]
+            and extend it to a basis of $\bR^4$.
+            \begin{solution}
+                The general element of $U$ can be written as $(a,-a,b,b)$, so a basis of $U$ is $\{(1,-1,0,0),(0,0,1,1)\}$. We extend it by adjoining the vectors $(1,0,0,0)$ and $(0,0,1,0)$. To prove that the list
+                \[\{(1,-1,0,0),(0,0,1,1),(1,0,0,0),(0,0,1,0)\}\]
+                is a basis of $\bR^4$, we notice that $(0,1,0,0)=(1,0,0,0)-(1,-1,0,0)$ and $(0,0,0,1)=(0,0,1,1)-(0,0,1,0)$. Therefore, every standard basis element is reachable by linear combinations of our list, proving that our list spans $\bR^4$. This is enough to show that our list is a basis of $\bR^4$.
+            \end{solution}
+            \item Let $P_5(\bR)$ be the vector space of all polynomials of degree at most 5 with real coefficients. Find a basis for the subspace
+            \[U=\{f(x)\in P_5(\bR):f(1)=0\text{ and }f(2)=0\}\]
+            and extend it to a basis of $P_5(\bR)$.
+            \begin{solution}
+                If $f(1)=0$ and $f(2)=0$, then $f$ must be a multiple of $(x-1)(x-2)=x^2-3x+2$. A polynomial of degree at most 5 which is a multiple of $(x-1)(x-2)$ must be of the form $g\cdot(x-1)(x-2)$ for some polynomial $g$ of degree at most 3, that is, $g\in P_3(\bR)$. A basis of $P_3(\bR)$ is given by $\{1,x,x^2,x^3\}$, therefore, a basis of $U$ is given by
+                \[\{x^2-3x+2,x^3-3x^2+2x,x^4-3x^3+2x^2,x^5-3x^4+2x^3\}.\]
+                To extend it to a basis of $P_5(\bR)$, we add in the elements 1 and $x$. To see that the list
+                \[\{x^2-3x+2,x^3-3x^2+2x,x^4-3x^3+2x^2,x^5-3x^4+2x^3,1,x\}\]
+                is a basis of $P_5(\bR)$, we note that
+                \begin{align*}
+                    x^2 &=(x^2-3x+2)-2+3\cdot x,\\
+                    x^3 &=(x^3-3x^2+2x)+3\cdot x^2-2\cdot x,\\
+                    x^4 &= (x^4-3x^3+2x^2)+3\cdot x^3-2\cdot x^2,\\
+                    x^5 &= (x^5-3x^4+2x^3)+3\cdot x^4-2\cdot x^3,
+                \end{align*}
+                where in each line after the first we have taken advantage of the fact that the previous element was just shown to be in the span of our list. Hence each of $1,x,x^2,x^3,x^4,x^5$ is a linear combination of elements of our list, showing that our list spans $P_5(\bR)$. This shows that our list is a basis of $P_5(\bR)$.
+            \end{solution}
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        Given subspaces $U_1,U_2\subseteq V$, prove that the following properties are equivalent.
+        \begin{itemize}
+            \item $V=U_1+U_2$ and $\{0\}=U_1\cap U_2$.
+            \item Every vector $v\in V$ can be written in a \textbf{unique} way as $v=u_1+u_2$ with $u_1\in U_1$ and $u_2\in U_2$.
+        \end{itemize}
+        When these hold, we say that $V$ is the \emph{direct sum} of $U_1$ and $U_2$, and write $V=U_1\oplus U_2$.
+    \end{problem}
+    \begin{solution}
+        First suppose that $V=U_1+U_2$ and $U_1\cap U_2=\{0\}$. Now let $v\in V$. The fact that $V=U_1+U_2$ implies that there is at least one way to write $v$ as a sum of a vector in $U_1$ and a vector in $U_2$. Suppose that we have two such ways:
+        \[v=u_1+u_2=u_1'+u_2',\quad u_1,u_1'\in U_1, u_2,u_2'\in U_2.\]
+        Then $u_1-u_1'=u_2'-u_2$. The left hand side is in $U_1$ while the right hand side is in $U_2$, and so the equality shows that both sides are in $U_1\cap U_2$. Since 0 is the only vector in $U_1\cap U_2$, it follows that $u_1=u_1'$ and $u_2=u_2'$. This proves the forward direction.
+
+        Now suppose that every vector $v\in V$ can be written in a unique way as $v=u_1+u_2$ with $u_1\in U_1$ and $u_2\in U_2$. This statement implies that $V=U_1+U_2$. It remains to show that $U_1\cap U_2=\{0\}$. Let $u$ be some vector in $U_1\cap U_2$. Note that we can write $u$ either as $u+0$ or $0+u$. If $u\neq 0$, then this is two distinct ways to write $u$ as a sum of a vector in $U_1$ with a vector in $U_2$, which is forbidden by the hypothesis. Thus $u=0$, so the only vector in $U_1\cap U_2$ is 0. This finishes the proof.
+    \end{solution}
+
+    \begin{problem}
+        Prove or give a counterexample: if $f\colon A\to B$ and $g\colon B\to C$ are invertible functions, then $g\circ f\colon A\to C$ is also invertible.
+    \end{problem}
+    \begin{solution}
+        The statement is true. Let $f\colon A\to B,g\colon B\to C$ be invertible, so there exist inverses $f^{-1}\colon B\to A$ and $g^{-1}\colon C\to B$ satisfying $f\circ f^{-1}=\id_B$, $f^{-1}\circ f=\id_A$, $g\circ g^{-1}=\id_C$, and $g^{-1}\circ g=\id_B$. Then I claim that $f^{-1}\circ g^{-1}\colon C\to A$ is an inverse of $g\circ f$. Indeed,
+        \[(f^{-1}\circ g^{-1})\circ (g\circ f)=f^{-1}\circ g^{-1}\circ g\circ f=f^{-1}\circ f=\id_A,\]
+        and
+        \[(g\circ f)\circ(f^{-1}\circ g^{-1})=g\circ f\circ f^{-1}\circ g^{-1}=g\circ g^{-1}=\id_C,\]
+        as desired.
+    \end{solution}
+    
+    \begin{problem}
+        Suppose $T\colon V\to W$ is a linear map, and $v_1,\dots,v_n\in V$. For each statement, give a proof or a counterexample.
+        \begin{enumerate}[(a)]
+            \item If $T$ is injective and $v_1,\dots,v_n$ are linearly independent, then $T(v_1),\dots,T(v_n)$ are linearly independent.
+            \begin{solution}
+                True. Suppose that $T(v_1),\dots,T(v_n)$ are dependent, so there is some nontrivial equation
+                \[\sum_{i=1}^n a_i T(v_i)=0.\]
+                This is equivalent to
+                \[T\left(\sum_{i=1}^n a_iv_i\right)=0,\]
+                which implies by injectivity of $T$ that $\sum_{i=1}^n a_iv_i=0$, i.e.\ the $v_i$ are linearly dependent.
+            \end{solution}
+            \item If $T(v_1),\dots,T(v_n)$ are linearly independent, then $v_1,\dots,v_n$ are linearly independent.
+            \begin{solution}
+                True. If $v_1,\dots,v_n$ are linearly dependent, then there is some nontrivial equation
+                \[\sum_{i=1}^n a_iv_i=0.\]
+                Therefore,
+                \[\sum_{i=1}^n T(a_iv_i)=T\left( \sum_{i=1}^n a_iv_i \right)=T(0)=0.\]
+            \end{solution}
+            \item If $T$ is surjective and $v_1,\dots,v_n$ span $V$, then $T(v_1),\dots,T(v_n)$ span $W$.
+            \begin{solution}
+                True. Let $w\in W$. Surjectivity of $T$ implies that $w=T(v)$ for some $v\in V$. Since the $v_i$ span $V$, we can write
+                \[v=a_1v_1+\cdots+a_nv_n\]
+                for some scalars $a_i$, not all 0. Then,
+                \[w=a_1T(v_1)+\cdots+a_nT(v_n),\]
+                showing that $w$ is a linear combination of the $T(v_i)$.
+            \end{solution}
+            \item If $T(v_1),\dots,T(v_n)$ span $W$, then $v_1,\dots,v_n$ span $V$.
+            \begin{solution}
+                False. Let $T\colon P_{42069}(\bR)\to \{0\}$ be the zero map and $n=0$. The empty set spans the vector space $\{0\}$ but the empty set does not span $P_{42069}(\bR)$.
+
+                In case one wants an example with $n>0$, here it is: Let $T\colon \bR^2\to\bR$ be the map $(x,y)\mapsto x+y$, and let $n=1$ and $v_1=(1,2)$. The single element $T((1,2))=3$ spans $\bR$ but $(1,2)$ does not span $\bR^2$.
+            \end{solution}
+        \end{enumerate}
+    \end{problem}
+\end{document}

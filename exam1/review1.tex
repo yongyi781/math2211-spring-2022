@@ -1,0 +1,138 @@
+\documentclass[11pt,oneside]{amsart}
+\usepackage{geometry}
+\usepackage{amssymb,parskip,mathtools,microtype}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{remark}{Remark}
+
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bZ}{\mathbb{Z}}
+\newcommand*\colvec[1]{\begin{psmallmatrix}#1\end{psmallmatrix}}
+\newcommand*\dcolvec[1]{\begin{pmatrix}#1\end{pmatrix}}
+
+\DeclareMathOperator{\Span}{span}
+\let\Re\relax
+\DeclareMathOperator{\Re}{Re}
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+
+\title{MATH2211 Spring 2022\\
+Exam 1 Review Problems}
+\author{}
+
+\begin{document}
+    \maketitle
+
+    \begin{problem}
+        Find three different complex solutions to
+        \[z^3=-1.\]
+        Express your answers in polar form $z=re^{i\theta}$.
+    \end{problem}
+
+    \begin{problem}
+        Let
+        \[v_1=\dcolvec{1\\1\\-1},\quad v_2=\dcolvec{2\\1\\1},\quad v_3=\dcolvec{0\\-1\\3},\quad v_4=\dcolvec{1\\0\\2}.\]
+        Delete one or more vectors from the list $v_1,v_2,v_3,v_4$ to produce a basis of $\bR^3$, or explain why this can't be done.
+    \end{problem}
+
+    \begin{problem}
+        Suppose that $U\subseteq \bC^n$ is a subspace. Show that there exists another subspace $V\subseteq\bC^n$ such that
+        \[U+V=\bC^n\quad\text{and}\quad U\cap V=\{0\}.\]
+    \end{problem}
+
+    \begin{problem}
+        Show that $T\colon\bR^2\to\bR^3$, defined by $T(x,y)=(x+y,0,2x-y)$, is a linear transformation.
+    \end{problem}
+
+    \begin{problem}
+        Let $W_1$ and $W_2$ be subspaces of $V$.
+        \begin{enumerate}[(a)]
+            \item Show that $W_1\cup W_2$ is a subspace of $V$ if and only if $W_1\subseteq W_2$ or $W_2\subseteq W_1$.
+            \item Show that $W_1\cap W_2$ is a subspace of $V$.
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        \leavevmode\begin{enumerate}[(a)]
+            \item Let $V\subseteq \bF_3^3$ be the space
+            \[\{(x,y,z)\in\bF_3^3:x+y+2z=0\}.\]
+            How many elements does $V$ contain? (Hint: you can always just do this by exhaustion. There are only 27 vectors in $\bF_3^3$.)
+            \item Generalize this: It turns out that \textbf{any} $r$-dimensional subspace of $\bF_p^n$ will always have $p^r$ elements. Can you prove why?
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        \leavevmode\begin{enumerate}[(a)]
+            \item Show expilcitly that the solutions in $\bC$ to $z^3=-1$ (the answer to Problem 1) are linearly dependent over $\bR$.
+            \item What is the dimension of their $\bR$-span over $\bR$?
+            \item What is the dimension of their $\bC$-span over $\bC$?
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        Let $\bR^\infty$ be the space of infinite sequences $(a_1,a_2,\dots)$ of real numbers. Let $S\colon\bR^\infty\to\bR^\infty$ be the shift operator
+        \[(a_1,a_2,a_3,\dots)\mapsto (a_2,a_3,\dots),\]
+        in other words, $S$ deletes the first term of its input and shifts all other terms to the left by one.
+        \begin{enumerate}[(a)]
+            \item Show that $S$ is a linear transformation.
+            \item What is the kernel of $S$?
+        \end{enumerate}
+    \end{problem}
+
+    \bigskip
+    See the next page for remarks/spoilers to these problems! Stop scrolling if you don't want to be spoiled.
+
+    \newpage
+    
+    \begin{remark}
+        My thinking would go as follows: find one solution ($-1=e^{\pi i}$ would be a solution) and the multiply it by the three cube roots of unity $1, e^{2\pi i/3}, e^{4\pi i/3}$.
+    \end{remark}
+
+    \begin{remark}
+        By inspection it looks like $v_1,v_2,v_3$ are linearly independent which is enough. To check linear independence just write out the system of equations you get from the equation
+        \[a_1v_1+a_2v_2+a_3v_3=0\]
+        and check its only solution is $a_1=a_2=a_3=0$.
+
+        If you do this, you'll find out there are nontrivial solutions! So this first try doesn't work. If you have time, try the other 3 combinations. None of them work! So maybe the span of this list of 4 vectors might actually have dimension 2\ldots.
+
+        Let's take the two vectors with zeros in them, $v_3$ and $v_4$ (to make things easier; strictly speaking, you don't need to pick vectors with zeros in them), and see if $v_1$ and $v_2$ are expressible as linear combinations of them. That is enough to show that $\dim_\bR\Span(v_1,v_2,v_3,v_4)=2$. Try this yourself; it shouldn't be too hard.
+    \end{remark}
+
+    \begin{remark}
+        My thinking would go as follows: Pick a basis of $U$ and extend it to a basis of the entire space $\bC^n$. Let $V$ be the span of the vectors you added. This should work. Note that $V$ isn't uniquely determined by $U$; it depends very much on how what vectors were added to the basis. After figuring this out I would write a proof that $U+V=\bC^n$ and $U\cap V=\{0\}$.
+    \end{remark}
+
+    \begin{remark}
+        Just definitions and algebra.
+    \end{remark}
+
+    \begin{remark}
+        \leavevmode\begin{enumerate}[(a)]
+            \item The backward direction is immediate from definitions. For the forward direction, start by supposing that $W_1\cup W_2$ is a subspace and letting $w_1\in W_1$ and $w_2\in W_2$. Then $w_1+w_2\in W_1\cup W_2$. Two cases: either $w_1+w_2\in W_1$ or $w_1+w_2\in W_2$. In the first case, we obtain $w_2=(w_1+w_2)-w_1\in W_1$, and because $w_2$ was arbitrary, this says that $W_2\subseteq W_1$. The other case is similar.
+            \item Just definitions and algebra.
+        \end{enumerate}
+    \end{remark}
+
+    \begin{remark}
+        \leavevmode\begin{enumerate}[(a)]
+            \item Following the hint is a very good idea if you need a feel for what's going on.
+            \item Pick a basis. Every vector is a unique linear combination of the basis. There are $p^r$ combinations of coefficients you can chose in this linear combination. It's amazing this stuff works over finite fields with no modifications!
+        \end{enumerate}
+    \end{remark}
+
+    \begin{remark}
+        The solutions add to 0! (A linear relation with coefficients in $\bR$!) Their $\bR$-span has dimension 2 since any two of the complex numbers are linearly independent over $\bR$. Their $\bC$-span has dimension 1 over $\bC$---it can't have dimension more than 1 because $\bC$ has dimension 1 over $\bC$. And the only way for the span to have dimension 0 is for all the elements in the set to be 0, which is clearly not the case here.
+    \end{remark}
+
+    \begin{remark}
+        \leavevmode\begin{enumerate}[(a)]
+            \item Just definitions and algebra!
+            \item The kernel of $S$ is all sequences whose 2nd term onward are zero, i.e. $\{(a,0,0,\dots):a\in\bR\}$. You can fill in the proof yourself.
+        \end{enumerate}
+    \end{remark}
+\end{document}
