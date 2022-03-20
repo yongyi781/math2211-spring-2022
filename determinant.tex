@@ -1,0 +1,234 @@
+\documentclass[11pt,oneside]{amsart}
+\usepackage{geometry}
+\usepackage{amssymb,amsthm,mathtools,microtype}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{example}{Example}
+
+\theoremstyle{plain}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+
+\newcommand{\extp}{\mathchoice{{\textstyle\bigwedge}}%
+    {{\bigwedge}}%
+    {{\textstyle\wedge}}%
+    {{\scriptstyle\wedge}}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bZ}{\mathbb{Z}}
+\DeclareMathOperator{\End}{End}
+
+\title{Determinants via the exterior algebra}
+\author{Yongyi Chen}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+I have not found on the internet any notes on determinants via the exterior algebra which are friendly to first year undergraduates, so I shall attempt to create such a note here.
+
+\section{Motivation for the exterior algebra}
+Recall the \emph{cross product} of vectors in $\bR^3$. This notion is used, for example, to define torque and angular momentum in physics. These are commonly called \emph{pseudovectors} because they are not real vectors in a physical sense in an important way: If the whole space is transformed by some linear transformation, the cross product of the transformed vectors is not the transformation applied to the cross product!
+
+As a simple example, suppose space was stretched by a factor of 2. This would make any vector twice as long, and so would make the cross product of two vectors four times as long! So as we can see, the cross product of two vectors behaves more like an \emph{area} than a \emph{length}.
+
+You may also have heard that cross product is only well defined in 3 dimensions (and 7 dimensions, but that's a different kind of cross product). The reason for this turns out to be the following: In 3 dimensions, the number of basis planes you can make out of basis vectors is 3 (namely, the $xy$, $yz$, and $xz$ planes), which is the same as the number of basis vectors. Furthermore, 3 is only the number of dimensions with this property.
+
+As we will see, the cross product of two vectors in $V$ should therefore belong not to the vector space $V$ itself, but to some vector space of ``areas'' in $V$. This leads to the notion of bivectors, which we will define as elements of the second exterior power of $V$. As a bonus, this gives us a definition of cross product that works in any dimension. This leads us to the next section.
+
+\section{The exterior algebra}
+Let $V$ be a finite dimensional vector space over some field $F$. Let $n=\dim V$.
+\begin{definition}
+    Let $k$ be a nonnegative integer. A \emph{$k$-blade} on $V$ is a formal concatenation of $k$ vectors (with each vector belonging to $V$) with the $\wedge$ symbol inserted between them. A \emph{$k$-vector} on $V$ is a linear combination of $k$-blades.
+\end{definition}
+\begin{remark}
+    A 1-blade is just a vector. The definition does not make clear what a 0-blade is, so we will define a 0-blade to be a scalar.
+\end{remark}
+\begin{example}
+    Let $V=F^2$ with standard basis $e_1,e_2$. Some examples of 2-blades are
+    \[e_1\wedge e_2,\quad e_2\wedge e_1,\quad (e_1+e_2)\wedge e_2.\]
+    An example of a 3-blade on $V$ is $e_1\wedge e_1\wedge e_2$. An example of a 3-vector on $V$ is $e_1\wedge e_1\wedge e_2+e_2\wedge (e_1+2e_2)\wedge e_1$ (a sum of two 3-blades).
+\end{example}
+\begin{definition}
+    The \emph{$k$th exterior power} of $V$, denoted $\extp^k V$, is the vector space of $k$-vectors on $V$, subject to the following axiomatic relations:
+    \begin{enumerate}[(a)]
+        \item Multilinarity: For any $v_1,\dots,v_k\in V$ and any $w\in V$, we have
+        \[v_1\wedge \cdots\wedge (v_i+w)\wedge\cdots\wedge v_k=(v_1\wedge\cdots\wedge v_i\wedge\cdots\wedge v_k)+(v_1\wedge\cdots\wedge w\wedge\cdots\wedge v_k),\]
+        and moreover for any $c\in F$ we have
+        \[v_1\wedge\cdots\wedge cv_i\wedge\cdots\wedge v_k=c\cdot (v_1\wedge\cdots \wedge v_k).\]
+        \item Skew-symmetry: For any $v_1,\dots,v_k\in V$ and any $1\leq i\leq k-1$, we have
+        \[v_1\wedge\cdots\wedge v_i\wedge v_{i+1}\wedge\cdots\wedge v_k=-v_1\wedge\cdots\wedge v_{i+1}\wedge v_i\wedge\cdots\wedge v_k.\]
+        \item Alternating property: For any $v_1,\dots,v_k\in V$, if some $v_i$ is equal to some $v_j$, then
+        \[v_1\wedge v_2\wedge\cdots\wedge v_k=0.\]
+        \item Nonzero for linearly independent vectors: If $v_1,\dots,v_k\in V$ are linearly independent, then
+        \[v_1\wedge\cdots\wedge v_k\neq 0.\]
+    \end{enumerate}
+    Furthermore, from now on, $k$-blades and $k$-vectors will be thought of as their corresponding elements of $\extp^k V$ (in other words, some $k$-vectors will end up being equal to 0 according to these relations, or to other $k$-vectors which don't look the same at first glance).
+\end{definition}
+\begin{remark}
+    In fact, for fields of characteristic other than 2, property (b) is equivalent to property (c). One can also check that a generalization of property (b) holds: any swap of the components of a blade (not necessarily adjacent components) induces multiplication by $-1$.
+\end{remark}
+\begin{remark}
+    We have by definition $\extp^0 V=F$ and $\extp^1 V=V$.
+    
+    A 2-blade in $\extp^2 V$ should be thought of as an ``oriented area''---the orientation being given by the span of the vectors in the blade and the order of the vectors. In a similar way, a 3-blade should be thought of as an ``oriented volume.'' For example, $e_1\wedge e_2$ can be thought of the oriented area of +1 in the plane spanned by $e_1$ and $e_2$, and $e_2\wedge e_1=-e_1\wedge e_2$ can be thought of as the oriented area of $-1$ in the same plane.
+\end{remark}
+\begin{example}
+    Let us look at Example 1 more closely. In $V=F^2$, we have $e_2\wedge e_1=-e_1\wedge e_2$, and $(e_1+e_2)\wedge e_2=e_1\wedge e_2+e_2\wedge e_2=e_1\wedge e_2$. Furthermore, $e_1\wedge e_1\wedge e_2=0$. In fact, as we will see soon, $\extp^3 F^2$ is the zero vector space.
+\end{example}
+\begin{example}
+    Sometimes a sum of $k$-blades can be written as a single $k$-blade. For example, in $F^3$, $e_1\wedge e_2+e_2\wedge e_3$ can be rewritten using the axioms as $(e_1-e_3)\wedge e_2$. However, not all $k$-vectors can be so written. For example, in $F^4$,
+    \[e_1\wedge e_2+e_3\wedge e_4\]
+    cannot be expressed as a single $2$-blade. Such $k$-vectors are said to be \emph{indecomposable}.
+\end{example}
+
+\begin{proposition}
+    Let $e_1,\dots,e_n$ be a ordered basis of $V$. Then $\extp^k V$ has, as a basis,  the set of $k$-blades $e_{i_1}\wedge\dots\wedge e_{i_k}$ for all tuples $(i_1,\dots,i_k)$ satisfying $1\leq i_1<\dots<i_k\leq n$.
+\end{proposition}
+\begin{proof}
+    First, let us show that the set of $k$-blades $e_{i_1}\wedge\dots\wedge e_{i_k}$ without the condition $1\leq i_1<\dots<i_k\leq n$ form a spanning set of $\extp^k V$. Let $v_1\wedge\dots\wedge v_k$ be a $k$-blade. Writing each $v_i$ as a linear combination of the $e_i$ and using multilinearity, we see that $v_1\wedge\dots\wedge v_k$ is a linear combination of the $e_{i_1}\wedge\dots\wedge e_{i_k}$ for various tuples $(i_1,\dots,i_k)$. Therefore, the $e_{i_1}\wedge\dots\wedge e_{i_k}$ span $\extp^k V$.
+    
+    Moreover, for any $e_{i_1}\wedge\dots\wedge e_{i_k}$ which violates the ordering condition on $(i_1,\dots,i_k)$, the blade is just zero if some two integers among $i_1,\dots,i_k$ are equal. If no two $i_1,\dots,i_k$ are equal, we can reorder the factors by swaps using the skew-symmetry axiom until $i_1<i_2<\dots<i_k$, picking up a factor of $\pm 1$ in the process. Hence we have proved the proposition.
+\end{proof}
+
+\begin{corollary}
+    The dimension of $\extp^k V$ is $\binom nk$.
+\end{corollary}
+\begin{proof}
+    This is because $\binom nk$ is the number of ways to choose a $k$-element set of an $n$-element set, and counting the number of tuples of integers $(i_1,\dots,i_k)$ satisfying $1\leq i_1<\dots<i_k\leq n$ is exactly the same counting problem.
+\end{proof}
+
+\begin{corollary}
+    $\dim\extp^n V=1$, and for $k>n$, $\extp^k V=0$.
+\end{corollary}
+Here is a very important proposition showing that the exterior algebra detects linear dependence.
+\begin{proposition}\label{prop:dep}
+    If $v_1,\dots,v_k$ are linearly dependent, then
+    \[v_1\wedge\cdots\wedge v_k=0.\]
+\end{proposition}
+\begin{proof}
+    Without loss of generality suppose that $v_k$ is a linear combination of the $v_1,\dots,v_{k-1}$:
+    \[v_k=a_1v_1+\dots+a_{k-1}v_{k-1}.\]
+    Then
+    \[\begin{split}
+        v_1\wedge\cdots\wedge v_k &= v_1\wedge\cdots\wedge (a_1v_1+\cdots+a_{k-1}v_{k-1})\\
+        &= \sum_{i=1}^{k-1}a_i(v_1\wedge\cdots\wedge v_{k-1}\wedge v_i)\\
+        &= 0,
+    \end{split}\]
+    where in the second equality we used multilinarity and in the last equality we used the alternating property, because in each of the $k-1$ terms in the summation, some vector appears twice.
+\end{proof}
+
+The preceding proposition therefore hints at what follows: because the determinant of a matrix should have something to do with linear independence of the column vectors, it turns out that we should define the determinant in terms of the top exterior power, $\extp^n V$.
+
+\section{The determinant}
+First, recall the following very nifty fact:
+\begin{proposition}\label{prop:end}
+    Let $W$ be a 1-dimensional vector space over a field $F$. Denote by $\End(W)$ the set of set of linear transformations from $W$ to $W$. Then
+    \[\End(W)\cong F,\]
+    in other words, every endomorphism of $W$ is just multiplication by some scalar.
+\end{proposition}
+\begin{proof}
+    Let $\{e\}$ be a basis of $W$. Let $T\colon W\to W$ be a linear transformation. By definition, $T$ is determined by where it sends $e$. Since $W$ is 1-dimensional, $Te$ must be a scalar multiple of $e$. Let $Te=\lambda e$ for some $\lambda\in F$. Then associating $T$ to the number $\lambda$ gives the desired one-to-one correspondence bewteen $\End(W)$ and $F$. One easily checks this correspondence is linear, and as a bonus, does not depend on the choice of basis vector $e$.
+\end{proof}
+
+Now for a vector space $V$ of dimension $n$, and pick an oriented basis $e_1,e_2,\dots,e_n$ of $V$. Consider the $n$th exterior power (the top exterior power) $\extp^n V$. It is one dimensional and is spanned by the single basis element
+\[e_1\wedge e_2\dots\wedge e_n.\]
+Let us discuss some intuition about what this space represents. For example, let $V=F^n$ and let $e_1,\dots,e_n$ be the standard basis. We can think of $e_1\wedge e_2\dots\wedge e_n$ as the standard oriented unit cube in $F^n$, with signed volume 1 according to, say, the right hand rule. If we swap any two of these basis elements, the resulting signed volume becomes $-1$, indicating that the orientation now follows the left hand rule. If we do two swaps, we get signed volume 1 again, since we have returned to the right hand rule. Also, if any basis vector is scaled by some factor $c$, then the resulting volume is also scaled by $c$. Finally, if a basis vector is replaced by a sum of that basis vector and another basis vector, the volume does not change, corresponding to the fact that the resulting parallelpiped is just a shear of the original cube.
+
+Now let $v_1,\dots,v_n$ be some arbitrary vectors in $V$. Since $\extp^n V$ is 1-dimensional, the $n$-blade $v_1\wedge\cdots\wedge v_n$ must be a scalar multiple of $e_1\wedge\cdots \wedge e_n$. That is,
+\[v_1\wedge\cdots\wedge v_n=c\cdot (e_1\wedge\cdots \wedge e_n)\]
+for some $c\in F$. Because the signed volume satisfies the same axioms as those we specified for $\extp^n V$, the number $c$ turns out to be precisely the signed volume of the oriented parallelepiped spanned by $v_1,\dots,v_n$.
+
+With this intuition in mind, let us define the determinant. First, let us define the map of a linear transformation on a vector space's top exterior power.
+\begin{definition}
+    Let $T\colon V\to V$ be a linear map. Define $\extp^n T\colon \extp^n V\to\extp^n V$ by the equation
+    \[(\extp^n T)(v_1\wedge\cdots\wedge v_n)=(Tv_1\wedge \cdots\wedge Tv_n).\]
+\end{definition}
+Now $\extp^n T\in\End(\extp^n V)$ and $\extp^n V$ is a 1-dimensional vector space. Therefore, by Proposition~\ref{prop:end}, $\extp^n T$ correponds to a scalar in $F$.
+\begin{definition}[The determinant]
+    Let $T\colon V\to V$ be a linear map. We define $\det T\in F$ to be the element of $F$ corresponding to $\extp^n T$ under the correspondence of Proposition~\ref{prop:end}.
+\end{definition}
+
+This definition may be slightly abstract. With the help of a basis, a down-to-earth equivalent definition can be given as follows: Let $e_1,\dots,e_n$ be an oriented basis of $V$, and let $T\colon V\to V$ be a linear transformation. Then $\det T$ is defined to be the unique scalar $c\in F$ such that
+\[Te_1\wedge \cdots\wedge Te_n=c\cdot(e_1\wedge\cdots\wedge e_n).\]
+By this definition we get immediately the most important interpretation of determinant:
+\begin{quote}
+    \emph{The determinant of a linear transformation is the factor by which the linear transformation scales signed volumes.}
+\end{quote}
+We also get for free the second most important interpretation of determinant, which we will state as a proposition:
+\begin{proposition}
+    Let $T\colon V\to V$ be a linear transformation. Then $T$ is an isomorphism iff $\det T\neq 0$.
+\end{proposition}
+\begin{proof}
+    $T$ is an isomorphism iff $Te_1,\dots,Te_n$ is a linearly independent set of vectors iff $Te_1\wedge\cdots\wedge Te_n\neq 0$ (by the nonzero axiom and Proposition~\ref{prop:dep}) iff $\det T\neq 0$.
+\end{proof}
+\begin{example}
+    Now let us compute the determinant of the general $3\times 3$ matrix using the machinery of the exterior power. Let
+    \[T=\begin{pmatrix}
+        a&b&c\\d&e&f\\g&h&i
+    \end{pmatrix}.\]
+    Thus
+    \begin{align*}
+        Te_1 &= ae_1+de_2+ge_3\\
+        Te_2 &= be_1+ee_2+he_3\\
+        Te_3 &= ce_1+fe_2+ie_3.
+    \end{align*}
+    Therefore,
+    \[\begin{split}
+        Te_1\wedge Te_2\wedge Te_3 &= (ae_1+de_2+ge_3)\wedge(be_1+ee_2+he_3)\wedge(ce_1+fe_2+ie_3)\\
+        &= aei \cdot e_1\wedge e_2\wedge e_3 + ahf\cdot e_1\wedge e_3\wedge e_2+dbi\cdot e_2\wedge e_1\wedge e_3+\\
+        &\qquad+dhc\cdot e_2\wedge e_3\wedge e_1+gbf\cdot e_3\wedge e_1\wedge e_2+gec\cdot e_3\wedge e_2\wedge e_1\\
+        &= (aei-ahf-dbi+dhc+gbf-gec)\cdot e_1\wedge e_2\wedge e_3.
+    \end{split}\]
+    Note the wedge product of 3 vectors each with 3 terms has 27 terms, but 21 of those 27 terms are zero because they have a repeated basis vector. One can verify that the formula we got is the same as the usual formula for the $3\times 3$ determinant.
+\end{example}
+The cofactor expansion inductive calculation of determinant (at least, using a column for the expansion) can also be easily proven, but is nasty to write down in \LaTeX. To get the cofactor expansion along a row, we need to use $\det(A)=\det(A^T)$, which is a theorem to be proven later.
+
+Another thing we get for free is the following properties of the determinant:
+\begin{enumerate}[(a)]
+    \item Multilinearity in the columns of the matrix: Let $M, N,N'$ be square $n\times n$ matrices such that, for some integer $1\leq i\leq n$, the $i$th column of $M$ is equal to the sum of the $i$th columns of $N$ and $N'$, and the $j$th columns of $M,N,N'$ are equal for $j\neq i$. Then $\det M=\det N+\det N'$.
+    
+    Moreover, if $M'$ is the matrix made out of $M$ by scaling some column by a factor of $c$, then $\det M'=c\det M$.
+    \item Skew-symmetry: If $M'$ is obtained from the square matrix $M$ by swapping two columns, then $\det M'=-\det M$.
+    \item Alternating property: The determinant of a matrix with two equal columns is zero.
+    \item Nonzero for linearly independent columns: If the columns of a matrix are linearly independent, then determinant of the matrix is not zero.
+\end{enumerate}
+These properties follow directly from the corresponding axioms for $\extp^n V$.
+
+Finally, we show that determinant is multiplicative:
+\begin{proposition}
+    Let $S,T\colon V\to V$ be linear transformations. Then
+    \[\det(ST)=\det(S)\det(T).\]
+\end{proposition}
+\begin{proof}
+    This follows because
+    \[(\extp^n (ST))=(\extp^n S)\circ (\extp^n T)\colon \extp^n V\to\extp^n V,\]
+    and composition of two endomorphisms of a 1-dimensional vector space corresponds to multiplication of their corresponding scaling factors.
+\end{proof}
+
+\section{Bonus material: cross product}
+Since I promised a better viewpoint on the cross product, I will provide it here.
+
+Let $V$ be a vector space of dimension $n$. The proper generalization of cross product is simply the wedge product:
+\begin{definition}
+    The wedge product $\wedge$ is the bilinear map $V\times V\to \extp^2 V$ sending a pair of vectors $v$ and $w$ to the 2-blade $v\wedge w\in\extp^2 V$.
+\end{definition}
+Note that the wedge product works in any dimension. It maps two vectors from an $n$-dimensional space to an $\binom n2$-dimensional space.
+
+Let us now compare this to the traditional cross product in 3 dimensions. Let $V=F^3$ with standard basis $e_1,e_2,e_3$. Then, the dimension of $\extp^2 V$ is equal to $\binom 32=3$, with a basis given by $\{e_1\wedge e_2,e_1\wedge e_3,e_2\wedge e_3\}$.
+
+We now describe how to recover the cross product from the wedge product. We simply use the fact that $\extp^2 V$ and $V$ have the same dimension, which means that there is some isomorphism between them. In fact, there are many isomorphisms between them. Let us pick this isomorphism:
+\begin{align*}
+    \varphi\colon \extp^2 V &\xrightarrow{\sim} V\\
+    e_1\wedge e_2&\mapsto e_3\\
+    e_1\wedge e_3 &\mapsto -e_2\\
+    e_2\wedge e_3 &\mapsto e_1.
+\end{align*}
+Then $v\times w$ can be recovered as $\varphi(v\wedge w)$. Of course, the isomorphism $\varphi$ does not respect linear transformations, and only exists because $\extp^2 V\cong V$, a feat that only happens for $\dim V=3$.
+
+The notion of torque and angular momentum in physics works much better as bivectors in $\extp^2 V$ than as vectors in $V$. To see why, recall that the angular momentum of an object is some quantity that measures rotational momentum along some plane of rotation. In our 3-dimensional world, we can define the angular momentum vector as the vector normal to that plane and whose length is the magnitude of the angular momentum, and orientation given by the right hand rule. The assignment of a normal vector to a plane is possible because the orthogonal complement of a plane in $\bR^3$ is a line.
+
+What if our universe was not 3-dimensional, say our universe was 9-dimensional? In this space, the orthogonal complement of a plane is a 7-dimensional subspace. Therefore, the whole idea of using a normal vector to represent angular momentum breaks down violently. This is why in a general universe, one must represent angular momentum as a bivector. The notion of bivector for measuring a quantity oriented along a plane is well behaved in any number of dimensions, unlike the notion of normal vector to a plane.
+\end{document}

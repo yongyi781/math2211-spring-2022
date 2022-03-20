@@ -1,0 +1,77 @@
+\documentclass[11pt,oneside]{amsart}
+\usepackage{geometry}
+\usepackage{amssymb,parskip,mathtools,microtype}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bZ}{\mathbb{Z}}
+\newcommand*\colvec[1]{\begin{psmallmatrix}#1\end{psmallmatrix}}
+\newcommand*\dcolvec[1]{\begin{pmatrix}#1\end{pmatrix}}
+
+\DeclareMathOperator{\Span}{span}
+\let\Re\relax
+\DeclareMathOperator{\Re}{Re}
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+\DeclareMathOperator{\im}{im}
+
+\title{MATH2211 Spring 2022\\
+Problem Set 5}
+\author{Due Wednesday, March 16, 2022 at 11:59 pm}
+
+\begin{document}
+    \maketitle
+    
+    \begin{problem}
+        Find a linear map $T\colon\bR^5\to\bR^2$ with kernel
+        \[\{(x_1, x_2, x_3, x_4, x_5): x_1=3x_2\text{ and }x_3=x_4=x_5\}\]
+        or prove that no such $T$ exists.
+    \end{problem}
+    
+    \begin{problem}
+        Show that there is a unique linear map $T\colon\bR^3\to\bR^3$ satisfying
+        \[T\dcolvec{1\\2\\1}=\dcolvec{1\\0\\1},\quad T\dcolvec{1\\1\\0}=\dcolvec{2\\1\\1},\quad T\dcolvec{1\\-1\\0}=\dcolvec{0\\1\\1},\]
+        and find the corresponding $3\times 3$ matrix. Is this linear map an isomorphism?
+    \end{problem}
+    
+    \begin{problem}
+        \leavevmode\begin{enumerate}[(a)]
+            \item Is there a linear map $T\colon\bR^4\to\bR^4$ with $\im(T)=\ker(T)$?
+            \item Is there a linear map $T\colon\bR^5\to\bR^5$ with $\im(T)=\ker(T)$?
+        \end{enumerate}
+    \end{problem}
+    
+    \begin{problem}
+        A \emph{linear functional} on an $F$-vector space $V$ means a linear map from $V$ to $F$ (the one-dimensional $F$-vector space). For example, $(x,y)\mapsto 2x+3y$ is a linear functional on $\bR^2$.
+        
+        \begin{enumerate}[(a)]
+            \item Suppose that $T$ is a linear functional on a vector space $V$ of dimension $n$. Prove that the kernel of $T$ has dimension either $n$ or $n-1$. When does the kernel have dimension $n-1$?
+            \item Suppose $S$ and $T$ are two linear functionals on a vector space $V$ with the same kernel. Prove that there exists a scalar $c\in F$ such that $T=cS$.
+        \end{enumerate}
+    \end{problem}
+    
+    \begin{problem}
+        \leavevmode\begin{enumerate}[(a)]
+            \item Let $T\colon\bR^5\to\bR^3$ be the linear map corresponding to
+        \[A=\begin{pmatrix}1&2&1&0&1\\2&1&0&0&2\\-1&0&1&1&1\end{pmatrix}.\]
+        Find bases for the kernel and image of $T$ and find all solutions to $Tx=\colvec{1\\0\\1}$.
+        \item Find bases for the kernel and image of the linear map $T\colon\bR^2\to\bR^3$ given by $T(x,y)=(x+y,0,2x-y)$.
+        \end{enumerate}
+    \end{problem}
+    
+    \begin{problem}
+        \leavevmode\begin{enumerate}[(a)]
+            \item Let $T\colon\bR^n\to\bR^n$ be an invertible linear transformation. Prove that the matrix of $T^{-1}$ is precisely the $n\times n$ matrix such that for $i=1,2,\dots,n$, its $i$th column is the unique vector $v$ such that $Tv=e_i$.
+            
+            \item Using part (a), find the inverse of
+            \[\begin{pmatrix}1&1&1\\3&-1&0\\1&0&2\end{pmatrix}.\]
+            Try not to use any previously learned matrix inversion methods from high school or such.
+        \end{enumerate}
+    \end{problem}
+\end{document}

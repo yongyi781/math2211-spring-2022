@@ -1,0 +1,184 @@
+\documentclass[11pt,oneside]{amsart}
+\usepackage{geometry}
+\usepackage{amssymb,parskip,mathtools,microtype}
+\usepackage[shortlabels]{enumitem}
+\usepackage[most]{tcolorbox}
+
+\definecolor{sol}{rgb}{0.1, 0.3, 0.6}
+
+\newtcolorbox{solution}{enhanced, breakable, colframe=sol, title=Solution}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bZ}{\mathbb{Z}}
+\newcommand*\colvec[1]{\begin{psmallmatrix}#1\end{psmallmatrix}}
+\newcommand*\dcolvec[1]{\begin{pmatrix}#1\end{pmatrix}}
+
+\DeclareMathOperator{\Span}{span}
+\let\Re\relax
+\DeclareMathOperator{\Re}{Re}
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+\DeclareMathOperator{\im}{im}
+
+\title{MATH2211 Spring 2022\\
+Problem Set 5}
+\author{Due Wednesday, March 16, 2022 at 11:59 pm}
+
+\begin{document}
+    \maketitle
+    
+    \begin{problem}
+        Find a linear map $T\colon\bR^5\to\bR^2$ with kernel
+        \[\{(x_1, x_2, x_3, x_4, x_5): x_1=3x_2\text{ and }x_3=x_4=x_5\}\]
+        or prove that no such $T$ exists.
+    \end{problem}
+    \begin{solution}
+        The desired kernel is the set $\{(3x,x,y,y,y):x,y\in\bR\}$, which is manifestly is a subspace of $\bR^5$ of dimension 2. However, $T$ has rank at most 2, implying that $\dim\ker T\geq 3$ by the rank-nullity theorem. This is incompatible with the desired kernel, so no such $T$ exists.
+    \end{solution}
+    
+    \begin{problem}
+        Show that there is a unique linear map $T\colon\bR^3\to\bR^3$ satisfying
+        \[T\dcolvec{1\\2\\1}=\dcolvec{1\\0\\1},\quad T\dcolvec{1\\1\\0}=\dcolvec{2\\1\\1},\quad T\dcolvec{1\\-1\\0}=\dcolvec{0\\1\\1},\]
+        and find the corresponding $3\times 3$ matrix. Is this linear map an isomorphism?
+    \end{problem}
+    \begin{solution}
+        Adding the latter two equations, then dividing by 2, says that $T\colvec{1\\0\\0}=\colvec{1\\1\\1}$. Subtracting the latter two equations, then dividing by 2, says that $T\colvec{0\\1\\0}=\colvec{1\\0\\0}$. Finally, we use the fact that $\colvec{0\\0\\1}=\colvec{1\\2\\1}-\colvec{1\\0\\0}-2\colvec{0\\1\\0}$ to obtain that $T\colvec{0\\0\\1}=\colvec{1\\0\\1}-\colvec{1\\1\\1}-2\colvec{1\\0\\0}=\colvec{-2\\-1\\0}$. Therefore we have deduced that $T$ is equal to
+        \[\begin{pmatrix}
+            1&1&-2\\1&0&-1\\1&0&0.
+        \end{pmatrix}\]
+        This proves existence and uniqueness of $T$. This also proves that $\colvec{1\\2\\1},\colvec{1\\1\\0}$, and $\colvec{1\\-1\\0}$ is a basis of $\bR^3$. Since the vectors $\colvec{1\\0\\1},\colvec{2\\1\\1},\colvec{0\\1\\1}$ are also a basis (by computation), this shows that the map $T$ is an isomorphism because $T$ sends a basis to a basis.
+    \end{solution}
+    \begin{solution}
+        Let $U=\begin{pmatrix}
+            1&1&1\\2&1&-1\\1&0&0
+        \end{pmatrix}$, the matrix formed from the input vectors. Let $S=\begin{pmatrix}
+            1&2&0\\0&1&1\\1&1&1
+        \end{pmatrix}$, the matrix formed from the desired output vectors. One sees that both matrices are invertible (their determinant is nonzero). Moreover, $SU^{-1}$ satisfies the 3 desired equations. Therefore $T=SU^{-1}=\begin{pmatrix}
+            1&1&-2\\1&0&-1\\1&0&0.
+        \end{pmatrix}$ and $T$ is an isomorphism since both $S$ and $U$ are isomorphisms.
+    \end{solution}
+    
+    \begin{problem}
+        \leavevmode\begin{enumerate}[(a)]
+            \item Is there a linear map $T\colon\bR^4\to\bR^4$ with $\im(T)=\ker(T)$?
+            \begin{solution}
+                Yes, an example is
+                \[\begin{pmatrix}
+                    0&0&1&0\\
+                    0&0&0&1\\
+                    0&0&0&0\\
+                    0&0&0&0
+                \end{pmatrix}.\]
+                In this case, $\ker(T)=(*,*,0,0)$ and $\im(T)$ is also $(*,*,0,0)$. (Here, $(*,*,0,0)$ is defined to mean $\{(a,b,0,0):a,b\in\bR\}$.)
+            \end{solution}
+            \item Is there a linear map $T\colon\bR^5\to\bR^5$ with $\im(T)=\ker(T)$?
+            \begin{solution}
+                No. By the rank-nullity theorem, $\dim \im T+\dim\ker T=5$. On the other hand, if $\im T=\ker T$, then $\dim \im T+\dim\ker T$ must be an even number.
+            \end{solution}
+        \end{enumerate}
+    \end{problem}
+    
+    \begin{problem}
+        A \emph{linear functional} on an $F$-vector space $V$ means a linear map from $V$ to $F$ (the one-dimensional $F$-vector space). For example, $(x,y)\mapsto 2x+3y$ is a linear functional on $\bR^2$.
+        
+        \begin{enumerate}[(a)]
+            \item Suppose that $T$ is a linear functional on a vector space $V$ of dimension $n$. Prove that the kernel of $T$ has dimension either $n$ or $n-1$. When does the kernel have dimension $n-1$?
+            \begin{solution}
+                We know that the image of $T$ is either $F$ or 0. By the rank-nullity theorem, in the first case, the kernel of $T$ has dimension $n-1$, and in the second case, the kernel of $T$ has dimension $n$. We also see that the kernel has dimension $n-1$ precisely when $T$ is not the zero map.
+            \end{solution}
+            \item Suppose $S$ and $T$ are two linear functionals on a vector space $V$ with the same kernel. Prove that there exists a scalar $c\in F$ such that $T=cS$.
+            \begin{solution}
+                First, if $\ker S=\ker T=V$, then both $S$ and $T$ are the zero map, so any scalar works.
+
+                Now assume $K=\ker S=\ker T$ is a proper subspace of $V$. Pick some $w\notin K$. Then we have $V=K\oplus\Span(w)$, and furthermore $Sw\neq 0$ and $Tw\neq 0$.
+                
+                Now, $S$ sends an arbitrary vector $v=k+aw$ ($k\in K, c\in F$) to $Sk+Saw=0+Scw=a(Sw)\in F$, and similarly $T$ sends the same vector $v=k+aw$ to $a(Tw)\in F$. Therefore, we can set $c=(Tw)/(Sw)$ and we have $T=cS$.
+            \end{solution}
+            % \begin{solution}
+            %     For those who have read up on quotients, here is a very quick proof: Let $K$ be the common kernel of $S$ and $T$. The linear maps $S$ and $T$ factor as compositions
+            %     \begin{align*}
+            %         V &\twoheadrightarrow V/K\xrightarrow{\bar S} F,\\
+            %         V &\twoheadrightarrow V/K\xrightarrow{\bar T} F.
+            %     \end{align*}
+            %     If $V/K=0$, then both $S$ and $T$ are the zero map, and the claim is trivial in this case. If $V/K$ is one-dimensional, then $S$ and $T$ are two maps from a one-dimensional space to $F$, and any two linear maps from a one-dimensional space to a one-dimensional space are scalar multiples of each other.
+            % \end{solution}
+        \end{enumerate}
+    \end{problem}
+    
+    \begin{problem}
+        \leavevmode\begin{enumerate}[(a)]
+            \item Let $T\colon\bR^5\to\bR^3$ be the linear map corresponding to
+        \[A=\begin{pmatrix}1&2&1&0&1\\2&1&0&0&2\\-1&0&1&1&1\end{pmatrix}.\]
+        Find bases for the kernel and image of $T$ and find all solutions to $Tx=\colvec{1\\0\\1}$.
+        \begin{solution}
+            The kernel is the set of all $x\in\bR^5$ such that $Ax=0$, so doing row operations (left multiplication by elementary matrices) will preserve the kernel. The rref form of $A$ is
+            \[\begin{pmatrix}
+                1&0&0&\frac12&2\\
+                0&1&0&-1&-2\\
+                0&0&1&\frac32&3
+            \end{pmatrix}.\]
+            Suppose that $x=(a,b,c,d,e)$ is in the kernel of this matrix. This gives the equations $a=-\frac 12d-2e$, $b=d+2e$, and $c=-\frac 32d-3e$. Thus $\ker A$ is completely parametrized by the pair $(d,e)$, so setting $d=1,e=0$ and $d=0,e=1$ should give a basis of $\ker A$. This yields
+            \[\left\{\left(-\frac 12,1,-\frac 32,1,0\right),\left(-2,2,-3,0,1\right)\right\}\]
+            for a basis of $\ker A$.
+
+            The rref of $A$ shows that the rank of $A$ is 3. Therefore, $A$ is surjective, so a basis of the image of $T$ is $\{(1,0,0),(0,1,0),(0,0,1)\}$.
+
+            To find all solutions to $Tx=\colvec{1\\0\\1}$, we first find that a particular solution is $\colvec{0\\0\\1\\0\\0}$ (since we notice that $\colvec{1\\0\\1}$ is the third column of $A$). The set of all solutions is therefore
+            \[\left\{\colvec{0\\0\\1\\0\\0}+c_1\colvec{-1/2\\1\\-3/2\\1\\0}+c_2\colvec{-2\\2\\-3\\0\\1}:c_1,c_2\in\bR\right\}.\]
+        \end{solution}
+        \item Find bases for the kernel and image of the linear map $T\colon\bR^2\to\bR^3$ given by $T(x,y)=(x+y,0,2x-y)$.
+        \begin{solution}
+            The same method as part (a) works here too. The following is a quick solution using some nice observations. The map $S\colon (x,y)\mapsto (x+y,2x-y)$ is an isomorphism. One can view $T$ as the composition $U\cdot S$ where $U(x,y)=(x,0,y)$. Since both $U$ and $S$ are injective, this shows that $\ker T=0$, so $\ker T$ has basis the empty set. Moreover, the image of $T$ is the image of $U$ which one easily sees is 2-dimensional with basis $\{(1,0,0),(0,0,1)\}$.
+        \end{solution}
+        \end{enumerate}
+    \end{problem}
+    
+    \begin{problem}
+        \leavevmode\begin{enumerate}[(a)]
+            \item Let $T\colon\bR^n\to\bR^n$ be an invertible linear transformation. Prove that the matrix of $T^{-1}$ is precisely the $n\times n$ matrix such that for $i=1,2,\dots,n$, its $i$th column is the unique vector $v$ such that $Tv=e_i$.
+            \begin{solution}
+                The $i$th column of the matrix of $T^{-1}$ is $T^{-1}e_i$, where $e_i$ denotes the $i$th standard basis vector. By definition $T^{-1}e_i$ is the unique vector $v$ such that $Tv=e_i$.
+            \end{solution}
+            
+            \item Using part (a), find the inverse of
+            \[\begin{pmatrix}1&1&1\\3&-1&0\\1&0&2\end{pmatrix}.\]
+            Try not to use any previously learned matrix inversion methods from high school or such.
+            \begin{solution}
+                Let $A$ denote the given matrix. Part (a) suggests that we solve the three systems
+                \begin{align*}
+                    x+y+z &= 1\\
+                    3x-y &= 0\\
+                    x+2z &= 0,
+                \end{align*}
+                \begin{align*}
+                    x+y+z &= 0\\
+                    3x-y &= 1\\
+                    x+2z &= 0,
+                \end{align*}
+                \begin{align*}
+                    x+y+z &= 0\\
+                    3x-y &= 0\\
+                    x+2z &= 1.
+                \end{align*}
+                For the first system, we have $x=-2z$ and $y=3x=-6z$, so that the first equation becomes $-2z-6z+z=1$, or $z=-\frac 17$, giving $x=\frac27$ and $y=\frac67$. Hence the first column of $A^{-1}$ is $\colvec{2/7\\6/7\\-1/7}$.
+
+                For the second system, we have $x=-2z$ and $y=3x-1=-6z-1$, so the first equation becomes $-2z-6z-1+z=0$, or $z=-\frac 17$, giving $x=\frac 27$ and $y=-\frac17$. Hence the second column of $A^{-1}$ is $\colvec{2/7\\-1/7\\-1/7}$.
+
+                For the third system, we have $x=1-2z$ and $y=3x=3-6z$, so the first equation becomes $1-2z+3-6z+z=0$, or $z=\frac 47$, giving $x=-\frac17$ and $y=-\frac37$. Hence the third column of $A^{-1}$ is $\colvec{-1/7\\-3/7\\4/7}$.
+
+                Therefore,
+                \[A^{-1}=\begin{pmatrix}
+                    \frac27 & \frac27 & -\frac17\\
+                    \frac67 & -\frac17 & -\frac37\\
+                    -\frac17 & -\frac17 & \frac47
+                \end{pmatrix}.\]
+            \end{solution}
+        \end{enumerate}
+    \end{problem}
+\end{document}
