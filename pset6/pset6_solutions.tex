@@ -1,0 +1,228 @@
+\documentclass[11pt,oneside]{amsart}
+\usepackage{geometry}
+\usepackage{amssymb,parskip,mathtools,microtype}
+\usepackage[shortlabels]{enumitem}
+\usepackage[most]{tcolorbox}
+
+\definecolor{sol}{rgb}{0.1, 0.3, 0.6}
+
+\newtcolorbox{solution}{enhanced, breakable, colframe=sol, title=Solution}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bZ}{\mathbb{Z}}
+\newcommand*\colvec[1]{\begin{psmallmatrix}#1\end{psmallmatrix}}
+\newcommand*\dcolvec[1]{\begin{pmatrix}#1\end{pmatrix}}
+
+\DeclareMathOperator{\Span}{span}
+\let\Re\relax
+\DeclareMathOperator{\Re}{Re}
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+\DeclareMathOperator{\im}{im}
+
+\title{MATH2211 Spring 2022\\
+Problem Set 6}
+\author{Due Wednesday, March 23, 2022 at 11:59 pm}
+
+\begin{document}
+    \maketitle
+    
+    \begin{problem}
+        Let $T\colon V\to V$ be a linear map from a vector space $V$ to itself. Let $\mathcal B=(v_1,\dots,v_n)$ be an ordered basis of $V$ and let $A\in M_n(F)$ be the matrix of $V$ with respect to $\mathcal B$. Let $\mathcal C=(v_1',\dots,v_n')$ be another ordered basis of $V$ and let $A'\in M_n(F)$ be the matrix of $T$ with respect to $\mathcal C$. Prove that there exists an invertible matrix $B\in M_n(F)$ such that $A'=BAB^{-1}$.
+    \end{problem}
+    \begin{solution}
+        Let $C\colon F^n\to V$ be defined by $Ce_i=v_i$, and let $C'\colon F^n\to V$ be defined by $C'e_i=v_i'$. Note that $(C')^{-1}C$ goes from $F^n$ to $F^n$, so it is an $n\times n$ matrix (with respect to the standard basis of $F^n$). I claim that we can take $B=(C')^{-1}C$.
+
+        To see why this is the case, recall that the matrix $A$, when thought of as a linear transformation $F^n\to F^n$, is the composition $C^{-1}TC$. The matrix $A'$ is likewise the composition $C'^{-1}TC'$. Finally,
+        \[BAB^{-1}=(C')^{-1}CC^{-1}TCC^{-1}C'=(C')^{-1}TC,\]
+        as desired.
+    \end{solution}
+
+    \begin{problem}
+        Factor $A=\begin{pmatrix}2&1&2\\0&1&0\\2&0&1\end{pmatrix}$ as a product of elementary matrices.
+
+        Hint: One way to approach this is to try to turn $A$ into the identity matrix via elementary matrices, then see how what you've done is useful.
+    \end{problem}
+    \begin{solution}
+        Let's try to turn $A$ into the identity matrix via elementary matrices:
+        \[\begin{split}
+            \begin{pmatrix}2&1&2\\0&1&0\\2&0&1\end{pmatrix} &\xrightarrow{\begin{psmallmatrix}1&0&0\\0&1&0\\-1&0&1\end{psmallmatrix}} \begin{pmatrix}
+                2&1&2\\
+                0&1&0\\
+                0&-1&-1
+            \end{pmatrix}\\
+            &\xrightarrow{\begin{psmallmatrix}1&0&0\\0&1&0\\0&1&1\end{psmallmatrix}}\begin{pmatrix}
+                2&1&2\\
+                0&1&0\\
+                0&0&-1
+            \end{pmatrix}\\
+            &\xrightarrow{\begin{psmallmatrix}1&-1&0\\0&1&0\\0&0&1\end{psmallmatrix}}\begin{pmatrix}
+                2&0&2\\
+                0&1&0\\
+                0&0&-1
+            \end{pmatrix}\\
+            &\xrightarrow{\begin{psmallmatrix}1&0&2\\0&1&0\\0&0&1\end{psmallmatrix}}\begin{pmatrix}
+                2&0&0\\
+                0&1&0\\
+                0&0&-1
+            \end{pmatrix}\\
+            &\xrightarrow{\begin{psmallmatrix}\frac 12&0&0\\0&1&0\\0&0&-1\end{psmallmatrix}}\begin{pmatrix}
+                1&0&0\\
+                0&1&0\\
+                0&0&1
+            \end{pmatrix}.
+        \end{split}\]
+        Therefore, it follows that
+        \[A=\begin{pmatrix}
+            1&0&0\\0&1&0\\1&0&1
+        \end{pmatrix}\begin{pmatrix}
+            1&0&0\\0&1&0\\0&-1&1
+        \end{pmatrix}\begin{pmatrix}
+            1&1&0\\0&1&0\\0&0&1
+        \end{pmatrix}\begin{pmatrix}
+            1&0&-2\\0&1&0\\0&0&1
+        \end{pmatrix}\begin{pmatrix}
+            2&0&0\\0&1&0\\0&0&-1
+        \end{pmatrix}.\]
+        The decomposition is not unique, of course.
+    \end{solution}
+
+    \begin{problem}
+        \leavevmode\begin{enumerate}[(a)]
+            \item In this problem we show that a one-sided inverse of a square matrix is a two-sided inverse. More precisely, let $A,B\in M_n(F)$. Show that
+            \[AB=I_n\iff BA=I_n.\]
+            Hint: For the forward direction, assume $AB=I_n$ and first show that $A\colon F^n\to F^n$ is surjective. Similar hint applies to the other direction.
+            \begin{solution}
+                ($\implies$) Suppose that $AB=I_n$. This implies that $ABv=v$ for all $v\in F^n$, which shows that $A$ is surjective. Because the dimension of the source and target of $A$ are equal, $A$ is therefore injective too. Now let $v\in F^n$ be arbitrary. We have
+                \[ABAv=I_nAv=Av,\]
+                and by injectivity of $A$ this implies that $BAv=v$. This shows that $BA=I_n$.
+
+                ($\Leftarrow$) Swap the role of $A$ and $B$ and use the above argument verbatim again.
+            \end{solution}
+
+            \item In this problem we show that inverses are unique. More precisely, suppose $A,B,C\in M_n(F)$ such that $AB=I_n$ and $AC=I_n$. Prove that $B=C$.
+            
+            Hint: In this proof, you are not allowed to multiply both sides by $A^{-1}$, because doing that presupposes that $A^{-1}$ is unique! Instead, start by proving that $A$ is surjective.
+            \begin{solution}
+                In fact the hint was not needed. Suppose $AB=AC=I_n$. Then $BA=I_n$ by part (a). Therefore, $B=B(AC)=(BA)C=C$.
+            \end{solution}
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        Let $A\in M_n(\bR)$ be an invertible matrix with integer entries, such that $A^{-1}$ also has integer entries. Prove that $\det A=\pm 1$.
+    \end{problem}
+    \begin{solution}
+        We know that $(\det A^{-1})=(\det A)^{-1}$, so $\det A$ is an integer whose reciprocal is also an integer. The only integers with this property are $\pm 1$.
+    \end{solution}
+
+    \newpage
+
+    \begin{problem}
+        Compute:
+        \begin{enumerate}[(a)]
+            \item $\det\begin{pmatrix}
+                0&1&2\\2&6&-1\\3&0&4
+            \end{pmatrix}$.
+            \begin{solution}
+                Let's compute it with wedge products. (You could also use the 6-term formula or cofactor expansion if you wanted.)
+                \[\begin{split}
+                    (2e_2&+3e_3)\wedge(e_1+6e_2)\wedge(2e_1-e_2+4e_3) \\
+                    &= 2e_2\wedge e_1\wedge 4e_3+3e_3\wedge e_1\wedge -e_2+3e_3\wedge 6e_2\wedge 2e_1\\
+                    &= (-8-3-36)e_1\wedge e_2\wedge e_3\\
+                    &=-47e_1\wedge e_2\wedge e_3.
+                \end{split}\]
+                Hence the determinant is $-47$.
+            \end{solution}
+            \item $\det\begin{pmatrix}
+                2&0&2&-4\\12&6&6&1\\0&-1&4&5\\3&2&3&2
+            \end{pmatrix}$.
+            \begin{solution}
+                The answer is $-232$. This is a heavy slog of a computation (no matter which method) and this is the one problem I think you have least need for a written out solution for :)
+
+                The most efficient method uses the method whereby the matrix is turned into an upper triangular matrix by determinant-1 elementary matrices. This is by far a faster determinant algorithm for larger (dense) matrices. Unfortunately this method was not discussed in class yet!
+            \end{solution}
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        Directly from the definition of $\det\begin{pmatrix}
+            a&b\\c&d
+        \end{pmatrix}=ad-bc$ for the $2\times 2$ determinant, prove the following:
+        \begin{enumerate}[(a)]
+            \item $\det(AB)=\det(A)\det(B)$ for all $A,B\in M_2(F)$.
+            \begin{solution}
+                First let's write $A=\begin{pmatrix}
+                    a&b\\c&d
+                \end{pmatrix}$ and $B=\begin{pmatrix}
+                    e&f\\g&h
+                \end{pmatrix}$. Then \[AB=\begin{pmatrix}
+                    ae+bg & af+bh \\ ce+dg & cf+dh
+                \end{pmatrix},\]
+                and
+                \[\begin{split}
+                    \det(AB) &=(ae+bg)(cf+dh)-(af+bh)(ce+dg)\\
+                    &= aecf+aedh+bgcf+bgdh-afce-afdg-bhce-bhdg\\
+                    &= adeh+bcfg-adfg-bceh\\
+                    &= (ad-bc)(eh-fg)\\
+                    &= \det A\cdot\det B.
+                \end{split}\]
+            \end{solution}
+            \item $A$ is invertible if and only if $\det(A)\neq 0$, in which case $A^{-1}=\frac 1{\det(A)}\begin{pmatrix}
+                d&-b\\-c&a
+            \end{pmatrix}$.
+            \begin{solution}
+                We have $A$ invertible iff $\ker A=0$. But $\ker A$ is the set of solutions to the system
+                \begin{align*}
+                    ax+by &= 0\\
+                    cx+dy &= 0.
+                \end{align*}
+                By high school algebra, this system has a unique solution iff the two lines (the graphs of the two equations) are not parallel, iff $ad\neq bc$.
+
+                Now suppose $A$ is invertible. To verify the identity for $A^{-1}$ we multiply:
+                \[\frac 1{\det A}\begin{pmatrix}
+                    d&-b\\-c&a
+                \end{pmatrix}\begin{pmatrix}
+                    a&b\\c&d
+                \end{pmatrix}=\frac 1{ad-bc}\begin{pmatrix}
+                    ad-bc&0\\0&ad-bc
+                \end{pmatrix}=I_2.\]
+            \end{solution}
+            \item The function $\det\colon \bR^2\times\bR^2\to\bR; (v,w)\mapsto \det\begin{pmatrix}
+                v&w
+            \end{pmatrix}$ (the determinant of the matrix whose columns are $v$ and $w$) is \emph{bilinear}, meaning that for all $\alpha,\beta\in F$ and $v_1,v_2,v,w_1,w_2,w\in\bR^2$, we have
+            \begin{enumerate}[(i)]
+                \item $\det(\alpha v_1+\beta v_2,w)=\alpha\det(v_1,w)+\beta\det(v_2,w)$,
+                \item $\det(v,\alpha w_1+\beta w_2)=\alpha\det(v,w_1)+\beta\det(v,w_2)$.
+            \end{enumerate}
+            \begin{solution}
+                Let $v_1=\colvec{a_1\\b_1}$, $v_2=\colvec{a_2\\b_2}$, $w_1=\colvec{c_1\\d_1}$, and $w_2=\colvec{c_2\\d_2}$. Let us verify (i):
+                \[\begin{split}
+                    \det(\alpha v_1+\beta v_2,w_1) &= \det\begin{pmatrix}
+                        \alpha a_1+\beta a_2 & c_1\\
+                        \alpha b_1+\beta b_2 & d_1
+                    \end{pmatrix}\\
+                    &= (\alpha a_1+\beta a_2)d_1-(\alpha b_1+\beta b_2)c_1\\
+                    &= \alpha(a_1d_1-b_1c_1)+\beta(a_2d_1-b_2c_1)\\
+                    &= \alpha\det(v_1,w_1)+\beta\det(v_2,w_1).
+                \end{split}\]
+                Now let us verify (ii):
+                \[\begin{split}
+                    \det(v_1,\alpha w_1+\beta w_2) &= \det\begin{pmatrix}
+                        a_1 & \alpha c_1+\beta c_2\\
+                        b_1 & \alpha d_1+\beta d_2
+                    \end{pmatrix}\\
+                    &= a_1(\alpha d_1+\beta d_2)-b_1(\alpha c_1+\beta c_2)\\
+                    &= \alpha(a_1d_1-b_1c_1)+\beta(a_1d_2-b_1c_2).
+                \end{split}\]
+                This concludes the proof of bilinearity.
+            \end{solution}
+        \end{enumerate}
+    \end{problem}
+\end{document}

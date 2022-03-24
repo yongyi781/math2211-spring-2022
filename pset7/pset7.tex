@@ -1,0 +1,75 @@
+\documentclass[11pt,oneside]{amsart}
+\usepackage{geometry}
+\usepackage{amssymb,parskip,mathtools,microtype}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bZ}{\mathbb{Z}}
+\newcommand{\eps}{\varepsilon}
+\newcommand*\colvec[1]{\begin{psmallmatrix}#1\end{psmallmatrix}}
+\newcommand*\dcolvec[1]{\begin{pmatrix}#1\end{pmatrix}}
+
+\DeclareMathOperator{\Span}{span}
+\let\Re\relax
+\DeclareMathOperator{\Re}{Re}
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\rank}{rank}
+
+\title{MATH2211 Spring 2022\\
+Problem Set 7}
+\author{Due Wednesday, March 30, 2022 at 11:59 pm}
+
+\begin{document}
+    \maketitle
+    
+    \begin{problem}
+        Suppose $A\in M_{m\times n}(F)$. Prove or find counterexamples:
+        \begin{enumerate}[(a)]
+            \item For any $B\in M_{n\times p}(F)$, $\rank(AB)\leq\rank(A)$.
+            \item For any $B\in M_{p\times m}(F)$, $\rank(BA)\leq\rank(A)$.
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        \leavevmode\begin{enumerate}[(a)]
+            \item Prove, using the exterior algebra definition of the determinant, that the determinant of an upper-triangular square matrix is the product of the diagonal entries.
+            \item You may assume that a similar proof as in part (a) shows that the same result holds for lower triangular square matrices as well.
+            
+            Prove that that the elementary matrix $E$ representing the row operation ``add a multiple of row $j$ to row $i$'' ($i\neq j$) has determinant 1.
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        \leavevmode\begin{enumerate}[(a)]
+            \item Prove that if $T\colon V\to W$ is surjective, then $^tT\colon W^*\to V^*$ is injective.
+            \item Prove that every linear transformation $T\colon V\to W$ can be factored as a composition
+            \[V\overset{T'}{\twoheadrightarrow} U\overset{i}{\hookrightarrow}W,\]
+            where $T'$ is surjective and $i$ is injective. (Hint: Set $U=\im T$.)
+            \item Recall that the rank of a linear transformation $T\colon V\to W$ is defined to be $\dim\im T$. Use parts (a) and (b) to prove that $\rank(T)=\rank(^tT)$.
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        Let $V$ be a vector space. Given a nonzero element $v\in V$ and a nonzero linear functional $\lambda\colon V\to \bR$, we can make a linear transformation $T_{v,\lambda}\colon V\to V$ by sending $x\in V$ to $\lambda(x)\cdot v$. Prove that $T$ has rank 1, and prove that every rank 1 linear transformation from $V$ to $V$ is equal to $T_{v,\lambda}$ for some $0\neq v\in V$ and $0\neq \lambda\colon V\to \bR$.
+
+        Hint for the second part: Problem 3(b) is very helpful.
+    \end{problem}
+
+    \begin{problem}
+        Let $\frac d{dx}\colon P_2(\bR)\to P_2(\bR)$ be the derivative operator on the space of polynomials of degree at most 2 over $\bR$.
+        \begin{enumerate}[(a)]
+            % \item Let $(1,x,x^2)$ be an ordered basis of $P_2(\bR)$. Let $(\eps_0,\eps_1,\eps_2)$ be the corresponding ordered dual basis of $P_2(\bR)^*$. Prove that
+            % \[\eps_i=(P_2(\bR)\ni p\mapsto \text{the coefficient of $x^i$ in }p)\in\bR.\]
+            \item Prove that $^t(\frac d{dx})\colon P_2(\bR)^*\to P_2(\bR)^*$ has a 1-dimensional kernel.
+            \item Prove that $\ker(^t(\frac d{dx}))$ is spanned by the functional taking a polynomial to its $x^2$ coefficient. Can you provide a plain English interpretation of what this is saying?
+        \end{enumerate}
+    \end{problem}
+\end{document}
