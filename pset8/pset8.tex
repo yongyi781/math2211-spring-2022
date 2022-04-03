@@ -1,0 +1,89 @@
+\documentclass[11pt,oneside]{amsart}
+\usepackage{geometry}
+\usepackage{amssymb,parskip,mathtools,microtype}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bZ}{\mathbb{Z}}
+\newcommand{\eps}{\varepsilon}
+\newcommand*\colvec[1]{\begin{psmallmatrix}#1\end{psmallmatrix}}
+\newcommand*\dcolvec[1]{\begin{pmatrix}#1\end{pmatrix}}
+
+\DeclareMathOperator{\Span}{span}
+\let\Re\relax
+\DeclareMathOperator{\Re}{Re}
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\rank}{rank}
+
+\title{MATH2211 Spring 2022\\
+Problem Set 8}
+\author{Due Friday, April 8, 2022 at 11:59 pm}
+
+\begin{document}
+    \maketitle
+    
+    \begin{problem}
+        For each of the following matrices $A$, find the eigenvalues of $A$ and a basis for each eigenspace, and say whether $A$ is diagonalizable.
+        \begin{enumerate}[(a)]
+            \item $A=\begin{pmatrix}
+                1&1\\0&1
+            \end{pmatrix}$.
+            \item $A=\begin{pmatrix}
+                1&1\\1&0
+            \end{pmatrix}$.
+            \item $A=\begin{pmatrix}
+                7&4&4\\0&-1&0\\-8&-4&-5
+            \end{pmatrix}$.
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        Compute the characteristic polynomial of the $n\times n$ matrix
+        \[A=\begin{pmatrix}
+            0&0&\cdots&0&0&-a_0\\
+            1&0&\cdots&0&0&-a_1\\
+            \vdots&\vdots&\cdots&\vdots&\vdots&\vdots\\
+            0&0&\cdots&1&0&-a_{n-2}\\
+            0&0&\cdots&0&1&-a_{n-1}
+        \end{pmatrix}.\]
+    \end{problem}
+
+    \begin{problem}
+        A \emph{stochastic matrix} is a square matrix of real numbers, all of whose entries are between 0 and 1 (inclusive), and with the property that the numbers in each column add to 1.
+
+        Prove that 1 is an eigenvalue of any stochastic matrix.
+    \end{problem}
+    
+    \begin{problem}
+        Let $T\colon V\to V$ be a linear transformation and $B\colon V\to V$ be an invertible linear transformation. Prove that
+        \[\chi_T(t)=\chi_{B^{-1}TB}(t). \]
+    \end{problem}
+
+    \begin{problem}
+        Prove that the eigenvalues of an upper triangular square matrix are the numbers on the diagonal.
+    \end{problem}
+
+    \begin{problem}
+        In this problem you will be working out the derivation of the closed form of the Fibonacci sequence that I showed at the beginning of the semester.
+        
+        Let $\bR^\infty$ be the vector space of infinite sequences of real numbers. Define the left shift operator $S\colon \bR^\infty\to\bR^\infty$ by
+        \[S(a_0,a_1,a_2,\dots)=(a_1,a_2,\dots).\]
+        \begin{enumerate}[(a)]
+            \item Because $\bR^\infty$ is infinite-dimensional (in fact, uncountably-dimensional), weird things can happen. Prove that \emph{every real number} is an eigenvalue of $S$. Also find the corresponding eigenvector for an arbitrary eigenvalue $\lambda\in\bR$.
+            \item Let $V\subseteq\bR^\infty$ be the subspace consisting of Fibonacci-like sequences; that is, consisting of sequences $(a_0,a_1,a_2,\dots)$ satisfying $a_n=a_{n-1}+a_{n-2}$ for all $n\geq 2$. Prove that if $v\in V$, then $Sv\in V$ as well.
+            \item Part (b) showed that $S$ restricts to a linear map $S|_V\colon V\to V$. What is the dimension of $V$? What are the eigenvalues and eigenvectors of $S|_V$?
+            \item Derive the closed form for the Fibonacci sequence $a_0=0,a_1=1; a_n=a_{n-1}+a_{n-2}$ for $n\geq 2$, using part (c).
+            \item To convince you that this ``abstract'' proof is not actually that abstract, here is a final exercise. Let $\varphi\colon\bR^2\to V$ be the isomorphism sending $(x,y)$ to the Fibonacci-like sequence whose first two terms are $a_0=x$ and $a_1=y$. Then $\varphi^{-1}\colon V\to\bR$ is the projection $(a_0,a_1,\dots,)\mapsto (a_0,a_1)$. Thus, the composition
+            \[\bR^2\xrightarrow{\varphi}V\xrightarrow S V\xrightarrow{\varphi^{-1}}\bR^2\]
+            is a linear transformation from $\bR^2\to\bR^2$, i.e.\ a $2\times 2$ matrix. What is this matrix?
+        \end{enumerate}
+    \end{problem}
+\end{document}
