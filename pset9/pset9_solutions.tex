@@ -1,0 +1,153 @@
+\documentclass[11pt,oneside]{amsart}
+\usepackage{geometry}
+\usepackage{amssymb,parskip,mathtools,microtype}
+\usepackage[shortlabels]{enumitem}
+\usepackage[most]{tcolorbox}
+
+\definecolor{sol}{rgb}{0.1, 0.3, 0.6}
+
+\newtcolorbox{solution}{enhanced, breakable, colframe=sol, title=Solution}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bN}{\mathbb{N}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bZ}{\mathbb{Z}}
+\newcommand{\eps}{\varepsilon}
+\newcommand*\colvec[1]{\begin{psmallmatrix}#1\end{psmallmatrix}}
+\newcommand*\dcolvec[1]{\begin{pmatrix}#1\end{pmatrix}}
+
+\DeclareMathOperator{\Span}{span}
+\let\Re\relax
+\DeclareMathOperator{\Re}{Re}
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\rank}{rank}
+
+\title{MATH2211 Spring 2022\\
+Problem Set 9}
+\author{Due Friday, April 15, 2022 at 11:59 pm}
+
+\begin{document}
+    \maketitle
+
+    Useful reading for Problems 1 and 2: Section 8.A of Axler.
+
+    \begin{problem}
+        A \emph{nilpotent} linear operator is defined to be a linear operator $T\colon V\to V$ such that some power of $T$ is equal to zero. In parts (b) to (d), let $N\colon V\to V$ be a nilpotent operator on a finite dimensional vector space $V$.
+        \begin{enumerate}[(a)]
+            \item Give an example of a $2\times 2$ real nilpotent matrix (i.e.\ a nilpotent linear operator from $\bR^2$ to $\bR^2$) none of whose entries are 0 (or prove they don't exist).
+            \begin{solution}
+                There are lots of examples. One is
+                \[N=\begin{pmatrix}
+                    1&1\\
+                    -1&-1
+                \end{pmatrix}.\]
+            \end{solution}
+            A quick way to see that this operator squares to zero (hence is nilpotent) is to notice that the kernel of $N$ equals the image of $N$ in this example. In general $N^2=0$ iff $\ker N\supseteq \im N$ as one can easily show.
+            \item Prove that 0 is the only eigenvalue of $N$.
+            \begin{solution}
+                Suppose $N^k=0$. Let $Nv=\lambda v$. Then $0=N^kv=\lambda^kv$, so $\lambda^k=0$, so $\lambda=0$.
+            \end{solution}
+            \item Let $U$ be any nonzero subspace of $V$ and suppose that $NU\subseteq U$. Prove that $NU$ is strictly contained in $U$.
+            
+            Hint: Use contradiction. Comment: A useful notation for strict containment is $\subsetneq$.
+            \begin{solution}
+                If $NU=U$, then $N^kU=U$ for all positive integers $k$, so $N$ cannot be nilpotent.
+            \end{solution}
+            
+            \item Prove that $N^{\dim V}=0$. Hint: Use the previous part iteratively starting with $U=V$.
+            \begin{solution}
+                We have a strict descending chain
+                \[V\supsetneq NV\supsetneq N^2V\cdots.\]
+                In such a descending chain, the dimensions must decrease by at least 1. Therefore the $(\dim V)$-th step after $V$ has dimension 0, in other words, $N^{\dim V}V$ is the 0 vector space. This says $N^{\dim V}$ is the 0 operator.
+            \end{solution}
+        \end{enumerate}
+    \end{problem}
+    
+    \begin{problem}
+        Given a polynomial $p\in F[t]$ (note: $F[t]$ just means the set of polynomials in the variable $t$ with coefficients in $F$) and a linear operator $T\colon V\to V$ on a vector space $V$ over $F$, the expression $p(T)$ makes sense if we use powers and addition of linear operators, to give a linear operator $p(T)\colon V\to V$.
+
+        \begin{enumerate}[(a)]
+            \item Let $V=F^2$ and $T\colvec{x\\y}=\colvec{x+y\\y}$. For the polynomial $p(t)=t^2-2t$, find $p(T)$.
+            \begin{solution}
+                $T^2$ sends $(x,y)$ to $(x+2y,y)$. Thus $T^2-2T$ sends $(x,y)$ to $(x+2y,y)-2(x+y,y)=(-x,-y)$. It is $-1$ times the identity matrix.
+            \end{solution}
+            \item Prove that for every linear operator $T\colon V\to V$ with $\dim V=n$, there exists a polynomial $p\in F[t]$, of degree at most $n^2$, such that $p(T)=0$.
+            
+            Note: Do not use the theory of minimal polynomials or any theorems named after multiple people.
+
+            Hint: Use linear dependence ideas.
+            \begin{solution}
+                The space of $n\times n$ matrices has dimension $n^2$. Therefore the space of linear operators on $V$, where $\dim V=n$, also has dimension $n^2$. Now the list $1,T,T^2,\dots,T^n$ is a list of $n+1$ elements of the space of linear operators on $V$, so they must be linearly dependent. The linear dependence between these gives our polynomial $p$.
+            \end{solution}
+            \item Let $J_{n,\lambda}$ be the $n\times n$ Jordan block (this is the standard name for what I called an ``atomic Jordan matrix'' in class) with $\lambda$'s on the diagonal and 1's above the diagonal. Prove that $p(J_{n,\lambda})=0$ for the polynomial $p(t)=(t-\lambda)^n$, but $q(J_{n,\lambda})\neq 0$ for the polynomial $q(t)=(t-\lambda)^{n-1}$.
+            
+            Comment (not a hint): This problem essentially says that $J_{n,\lambda}-\lambda I_n$ is a nilpotent operator and that $n$ is the least power $k$ that makes $(J_{n,\lambda}-\lambda I_n)^k=0$.
+            \begin{solution}
+                Notice that $J_{n,\lambda}-\lambda I_n$ is a matrix with 1's one step above the diagonal and 0's everywhere else. One proves by induction that $(J_{n,\lambda}-\lambda I_n)^k$ is the matrix with 1's $k$ steps above the diagonal and 0's everywhere else. Thus $(J_{n,\lambda}-\lambda I_n)^{n-1}$ is the matrix with a sole 1 in the upper right corner, and $(J_{n,\lambda}-\lambda I_n)^n=0$.
+            \end{solution}
+        \end{enumerate}
+    \end{problem}
+    
+    \begin{problem}
+        A \emph{permutation matrix} is a square matrix where in each column and each row, there is exactly one nonzero entry and that nonzero entry is a 1. The name is because an $n\times n$ permutation matrix times an $n\times 1$ vector is the same vector but with entries permuted. Let $P$ be an $n\times n$ permutation matrix.
+        \begin{enumerate}[(a)]
+            \item Prove that the product of two $n\times n$ permutation matrices is another permutation matrix.
+            \begin{solution}
+                Any permutation matrix restricts to a set-theoretic bijection from $\{e_1,\dots,e_n\}$ to itself. In other words, if $P$ is a permutation matrix, then for all $i$, $Pe_i$ is of the form $e_j$ for some $j$, and each $e_j$ is represented exactly once. Thus the composition of two permutation matrices also restricts to a set-theoretic bijection from $\{e_1,\dots,e_n\}$ to itself.
+            \end{solution}
+            \item Using part (a), prove that some positive power of $P$ is equal to the identity.
+            
+            Hint: Are there infinitely many $n\times n$ permutation matrices?
+            \begin{solution}
+                There are finitely many $n\times n$ permutation matrices, in fact $n!$ of them. Thus by the pigeonhole principle, in the list $1,P,P^2,\dots,P^{n!}$ there must be a repeat, namely there are some $0\leq \ell< k\leq n!$ such that $P^k=P^\ell$. We also observe that permutation matrices are invertible. Therefore $P^{k-\ell}=I_n$.
+            \end{solution}
+            \item Provide a counterexample to the claim that for all $n\in\bZ^+$ and all $n\times n$ permutaion matrices $P$, there is some $1\leq k\leq n$ such that $P^k$ is the identity.
+            
+            Hint: You will not find a counterexample by looking at $n\leq 4$.
+            \begin{solution}
+                One example is
+                \[P=\begin{pmatrix}
+                    0&1&0&0&0\\
+                    1&0&0&0&0\\
+                    0&0&0&0&1\\
+                    0&0&1&0&0\\
+                    0&0&0&1&0
+                \end{pmatrix}.\]
+                6 is the smallest positive power of $P$ equal to the identity.
+                Remark: In cycle notation (which you will most likely learn in abstract algebra) this matrix corresponds to the permutation $(12)(345)$, a product of a 2-cycle and a 3-cycle. This permutation has order $2\times 3=6$.
+            \end{solution}
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        Let $P_3$ be the space of real polynomials of degree at most 3, and define an inner product on $P_3$ by
+        \[\langle f,g\rangle=\int_0^1 f(x)g(x)\,dx.\]
+        Set $U=\Span\{x,x^2\}$.
+        \begin{enumerate}[(a)]
+            \item Find an orthonormal basis for $U$.
+            \begin{solution}
+                First let's find an orthogonal basis. We keep $x$ and make a replacement for $x^2$. Let's project $x^2$ onto the line spanned by $x$:
+                \[P_x(x^2)=\frac{\langle x^2,x\rangle}{\langle x,x\rangle}x=\frac{1/4}{1/3}x=\frac 34x.\]
+                What we want is the orthogonal part $x^2-\frac 34x$. This vector is indeed orthogonal to $x$ so $\{x,x^2-\frac 34x\}$ is an orthogonal basis. Now we just need to divide them by their norms to make it an orthonormal basis. The norm of $x$ is $\frac 1{\sqrt3}$ and the norm of $x^2-\frac 34x$ is $\frac 1{\sqrt{80}}=\frac 1{4\sqrt 5}$. Thus an orthonormal basis for $U$ is
+                \[\left\{\sqrt 3 x, 4\sqrt 5(x^2-\frac 34x)\right\}=\{\sqrt 3 x,4\sqrt 5 x^2-3\sqrt 5x\}.\]
+                We can double-check our answer by taking inner products of every pair in the list and checking that they are 1 if we take the same vector and 0 if we take different vectors.
+            \end{solution}
+            \item Write $x^3=p(x)+q(x)$ with $p(x)\in U$ and $q(x)\in U^\perp$.
+            \begin{solution}
+                We can find $p(x)$ by taking the projections of $x^3$ onto each vector in the orthonormal basis we just found, and adding them up. Then the difference between $x^3$ and that will lie in $U^\perp$. Note that $\langle v,v\rangle=1$ when $v$ is a vector in an orthonormal basis, so the projection formulas are simpler:
+                \begin{align*}
+                    P_{\sqrt 3x}(x^3) &= \langle x^3,\sqrt3x\rangle\sqrt 3x=\frac 35 x,\\
+                    P_{4\sqrt 5 x^2-3\sqrt 5x}(x^3) &= \langle x^3,4\sqrt 5 x^2-3\sqrt 5x\rangle (4\sqrt 5 x^2-3\sqrt 5x)=\frac 43x^2-x.
+                \end{align*}
+                So we have $p(x)=\frac 35x+\frac 43x^2-x=\frac 43x^2-\frac 25x$, and so $q(x)=x^3-\frac 43x^2+\frac 25x$. To double check our work we can calculate the inner product of $q(x)$ with both $x$ and $x^2$ and check that they both give 0, verifying that $q(x)\in U^\perp$.
+            \end{solution}
+        \end{enumerate}
+    \end{problem}
+\end{document}

@@ -1,0 +1,204 @@
+\documentclass[11pt,oneside]{amsart}
+\usepackage{geometry}
+\usepackage{amssymb,parskip,mathtools,microtype}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{remark}{Remark}
+
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bZ}{\mathbb{Z}}
+\newcommand{\eps}{\varepsilon}
+\newcommand*\colvec[1]{\begin{psmallmatrix}#1\end{psmallmatrix}}
+\newcommand*\dcolvec[1]{\begin{pmatrix}#1\end{pmatrix}}
+\newcommand{\extp}{\mathchoice{{\textstyle\bigwedge}}%
+    {{\bigwedge}}%
+    {{\textstyle\wedge}}%
+    {{\scriptstyle\wedge}}}
+
+\DeclareMathOperator{\Span}{span}
+\let\Re\relax
+\DeclareMathOperator{\Re}{Re}
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+
+\title{MATH2211 Spring 2022\\
+Exam 2 Review Problems}
+\author{}
+
+\begin{document}
+    \maketitle
+
+    \section{Major topics}
+    \begin{enumerate}
+        \item Matrix equations and elementary row operations
+        \item Exterior algebra and determinants
+        \item Duals, transpose, four fundamental subspaces, rank
+        \item Eigenvalues
+    \end{enumerate}
+
+    \section{Problems}
+    \begin{problem}
+        State and prove the rank-nullity theorem.
+    \end{problem}
+
+    \begin{problem}
+        Factor the matrix
+        \[A=\begin{pmatrix}
+            2&4\\1&-1
+        \end{pmatrix}\]
+        as $A=CDC^{-1}$ with $D$ diagonal, or explain why this cannot be done.
+    \end{problem}
+
+    \begin{problem}
+        Prove that every $2\times 2$ matrix with negative determinant is diagonalizable.
+    \end{problem}
+
+    \begin{problem}
+        Prove that the geometric multiplicity of an eigenvalue $\lambda$ of a matrix $A$ is less than or equal to the algebraic multiplicity of $\lambda$ for $A$.
+    \end{problem}
+
+    \begin{problem}
+        Let $e_1,\dots,e_n$ be the standard basis of $F^n$ and let $\eps_1,\dots,\eps_n$ be the standard dual basis. Let $A=(a_{ij})_{1\leq i,j\leq n}$ be an $n\times n$ matrix. Let $i$ and $j$ be some integers between 1 and $n$. What is $\eps_iAe_j$?
+    \end{problem}
+
+    \begin{problem}
+        Let $A\in M_2(F)$. Prove that there exist linear functionals $\lambda_1,\lambda_2\in (F^2)^*$ and vectors $v_1,v_2\in F^2$ such that
+        \[Aw=\lambda_1(w)v_1+\lambda_2(w)v_2\]
+        for all $w\in F^2$. (This is the rank 2 version of problem set 7 problem 4).
+    \end{problem}
+
+    \begin{problem}
+        Let $E\in M_n(F)$ be an elementary matrix and let $A\in M_n(F)$ be a matrix.
+        \begin{enumerate}[(a)]
+            \item Does $EA$ have the same kernel as $A$? Does $AE$ have the same kernel as $A$?
+            \item Does $EA$ have the same nullity as $A$? Does $AE$ have the same nullity as $A$?
+            \item Does $EA$ have the same rank as $A$? Does $AE$ have the same rank as $A$?
+            \item Does $EA$ have the same image as $A$? Does $AE$ have the same image as $A$?
+            \item Does $EA$ have the same determinant as $A$? Does $AE$ have the same determinant as $A$?
+            \item Does $EA$ have the same eigenvalues as $A$? Does $AE$ have the same eigenvalues as $A$?
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        The fact that $v\wedge v=0$ for all vectors $v\in V$ is an axiom of the exterior algebra. Does it follow that for all $\alpha\in\extp^2 V$, we have $\alpha\wedge\alpha=0$?
+    \end{problem}
+    
+    \begin{problem}
+        Let $A=\begin{pmatrix}
+            1&2&3\\4&5&6\\7&8&9
+        \end{pmatrix}$. 
+        \begin{enumerate}[(a)]
+            \item What is the matrix of $\extp^2 A$ with respect to the ordered basis $(e_1\wedge e_2, e_1\wedge e_3,e_2\wedge e_3)$?
+            \item What is the matrix of $\extp^3 A$ with respect to the ordered basis $e_1\wedge e_2\wedge e_3$?
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        \leavevmode\begin{enumerate}[(a)]
+            \item The space $V$ of real sequences with finitely many nonzero terms has dual $V^*=\bR^\infty$, the space of real sequences without any conditions. Let $S$ be the left shift operator on $V$, which sends $(a_0,a_1,\dots)$ to $(a_1,a_2,\dots)$. Describe $^tS$ as an operator on $\bR^\infty$.
+            \item Is $S$ injective? Is $S$ surjective? Is $^tS$ injective? Is $^tS$ surjective?
+        \end{enumerate}
+    \end{problem}
+
+    \bigskip
+    See the next page for remarks/spoilers to these problems! Stop scrolling if you don't want to be spoiled.
+
+    \newpage
+
+    \section{Hints and remarks}
+
+    \begin{remark}
+        If you need to, look it up in the course notes and/or Axler!
+    \end{remark}
+    
+    \begin{remark}
+        Diagonalization, find eigenvalues and eigenvectors. Eigenvalues will turn out to be 3 and $-2$.
+    \end{remark}
+
+    \begin{remark}
+        Hint: Eigenvalues have to be distinct or else the determinant is positive or zero!
+    \end{remark}
+    
+    \begin{remark}
+        Let $v_1,\dots,v_k$ be a basis of the eigenspace of $\lambda$, so that the geometric multiplicity of $\lambda$ is equal to $k$. Extend this to a basis of $V$. In this basis, the matrix of $A$ has the block form
+        \[\begin{pmatrix}
+            \lambda I_k&B\\
+            0&C
+        \end{pmatrix}.\]
+        The matrix $tI-A$ therefore has the matrix form
+        \[\begin{pmatrix}
+            tI_k-\lambda I_k & B\\
+            0 & tI_{n-k}-C
+        \end{pmatrix}.\]
+        The determinant of this is $\det(tI_k-\lambda I_k)\det(tI_{n-k}-C)=(t-\lambda)^k\det(tI_{n-k}-C)$, so the algebraic multiplicity of $\lambda$ is at least $k$.
+    \end{remark}
+
+    \begin{remark}
+        It's $a_{ij}$.
+    \end{remark}
+
+    \begin{remark}
+        Let $A=\begin{psmallmatrix}a_{11}&a_{12}\\a_{21}&a_{22}\end{psmallmatrix}$. Think of $A\colvec{x\\y}$ as taking $x$ times the first column of $A$ plus $y$ times the second column of $A$. Now $x$ is just $\eps_1\colvec{x\\y}$ and $y$ is just $\eps_2\colvec{x\\y}$, so we see that $A\colvec{x\\y}=(\eps_1\colvec{x\\y})\colvec{a_{11}\\a_{21}}+(\eps_2\colvec{x\\y})\colvec{a_{12}\\a_{22}}$! In tensor notation we would write
+        \[A=v_1\otimes \eps_1+v_2\otimes \eps_2\in F^2\otimes (F^2)^*\]
+        where $v_1=\colvec{a_{11}\\a_{21}}$ and $v_2=\colvec{a_{12}\\a_{22}}$.
+
+        This isn't the only way. If we think of $Av$ as being the vector composed of ($A$'s first row) times $v$ and ($A$'s second row) times $v$, then we could also write $A$ as
+        \[A=e_1\otimes \lambda_1+e_2\otimes \lambda_2\]
+        where $\lambda_1$ and $\lambda_2$ are the rows of $A$!
+    \end{remark}
+
+    \begin{remark}
+        \begin{enumerate}[(a)]
+            \item Yes, no. (What's the kernel of $AE$?)
+            \item Yes, yes.
+            \item Yes, yes.
+            \item No, yes.
+            \item Yes, yes.
+            \item No, no.
+        \end{enumerate}
+    \end{remark}
+
+    \begin{remark}
+        Nope! Let $V=F^4$ and let $\alpha=e_1\wedge e_2+e_3\wedge e_4\in \extp^2 V$. Then
+        \[\alpha\wedge\alpha=e_1\wedge e_2\wedge e_3\wedge e_4\neq 0.\]
+        Interestingly, 4 is the minimum dimension in which this is possible.
+    \end{remark}
+
+    \begin{remark}
+        \leavevmode\begin{enumerate}[(a)]
+            \item We compute
+            \begin{align*}
+                Ae_1\wedge Ae_2 &=(e_1+4e_2+7e_3)\wedge (2e_1+5e_2+8e_3)=-3e_1\wedge e_2-6e_1\wedge e_3-3e_2\wedge e_3\\
+                Ae_1\wedge Ae_3 &=(e_1+4e_2+7e_3)\wedge (3e_1+6e_2+9e_3)=-6e_1\wedge e_2-12e_1\wedge e_3-6e_2\wedge e_3\\
+                Ae_2\wedge Ae_3 &= (2e_1+5e_2+8e_3)\wedge (3e_1+6e_2+9e_3)=-3e_1\wedge e_2-6e_1\wedge e_3-3e_2\wedge e_3.
+            \end{align*}
+            Thus in the given ordered basis,
+            \[\extp^2 A=\begin{pmatrix}
+                -3&-6&-3\\
+                -6&-12&-6\\
+                -3&-6&-3
+            \end{pmatrix}.\]
+            \item This is just the determinant of $A$, which is 0 because $A$ is not invertible (one way to see this is that the second column is the average of the first and third columns).
+        \end{enumerate}
+    \end{remark}
+
+    \begin{remark}
+        \begin{enumerate}[(a)]
+            \item Let $(b_0,b_1,b_2,\dots)\in\bR^\infty$. As a linear functional on $V$, it sends $(a_0,a_1,a_2,\dots)$ to
+            \[a_0b_0+a_1b_1+a_2b_2+\cdots\]
+            (which is well defined because finitely many $a_i$ are nonzero). Now $(b_0,b_1,b_2,\dots)S$ sends $(a_0,a_1,a_2,\dots)$ to
+            \[\begin{split}
+                (b_0,b_1,b_2,\dots)S(a_0,a_1,a_2,\dots) &=(b_0,b_1,b_2,\dots)(a_1,a_2,a_3,\dots)\\
+                &=b_0a_1+b_1a_2+b_2a_3+\cdots\\
+                &= (0,b_0,b_1,\dots)(a_0,a_1,a_2,\dots).
+            \end{split}\]
+            In other words, $(b_0,b_1,b_2,\dots)S=(0,b_0,b_1,b_2,\dots)$. Thus $^tS$ is the right shift operator on $\bR^\infty$ which inserts a 0 into the beginning of the sequence and shifts everything else to the right by one.
+            \item $S$ is not injective but it is surjective. $^tS$ is injective but it is not surjective.
+        \end{enumerate}
+    \end{remark}
+\end{document}

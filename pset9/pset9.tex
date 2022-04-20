@@ -46,11 +46,11 @@ Problem Set 9}
     \end{problem}
     
     \begin{problem}
-        Given a polynomial $p\in F[t]$ (note: $F[t]$ just means the set of polynomials in the variable $t$ with coefficients in $F$) and a linear operator $T\colon V\to V$ on a finite dimensional vector space $V$ over $F$, the expression $p(T)$ makes sense if we use powers and addition of linear operators, to give a linear operator $p(T)\colon V\to V$.
+        Given a polynomial $p\in F[t]$ (note: $F[t]$ just means the set of polynomials in the variable $t$ with coefficients in $F$) and a linear operator $T\colon V\to V$ on a vector space $V$ over $F$, the expression $p(T)$ makes sense if we use powers and addition of linear operators, to give a linear operator $p(T)\colon V\to V$.
 
         \begin{enumerate}[(a)]
             \item Let $V=F^2$ and $T\colvec{x\\y}=\colvec{x+y\\y}$. For the polynomial $p(t)=t^2-2t$, find $p(T)$.
-            \item Prove that for every linear operator $T\colon V\to V$ on a finite dimensional space $V$, there exists a polynomial $p\in F[t]$, of degree at most $n^2$, such that $p(T)=0$.
+            \item Prove that for every linear operator $T\colon V\to V$ with $\dim V=n$, there exists a polynomial $p\in F[t]$, of degree at most $n^2$, such that $p(T)=0$.
             
             Note: Do not use the theory of minimal polynomials or any theorems named after multiple people.
 
@@ -62,10 +62,10 @@ Problem Set 9}
     \end{problem}
     
     \begin{problem}
-        A \emph{permutation matrix} is a matrix where in each column and each row, there is exactly one nonzero entry and that nonzero entry is a 1. The name is because a permutation matrix times an $n\times 1$ vector is the same vector but with entries permuted. Let $P$ be an $n\times n$ permutation matrix.
+        A \emph{permutation matrix} is a square matrix where in each column and each row, there is exactly one nonzero entry and that nonzero entry is a 1. The name is because an $n\times n$ permutation matrix times an $n\times 1$ vector is the same vector but with entries permuted. Let $P$ be an $n\times n$ permutation matrix.
         \begin{enumerate}[(a)]
             \item Prove that the product of two $n\times n$ permutation matrices is another permutation matrix.
-            \item Using part (a), prove that some power of $P$ is equal to the identity.
+            \item Using part (a), prove that some positive power of $P$ is equal to the identity.
             
             Hint: Are there infinitely many $n\times n$ permutation matrices?
             \item Provide a counterexample to the claim that for all $n\in\bZ^+$ and all $n\times n$ permutaion matrices $P$, there is some $1\leq k\leq n$ such that $P^k$ is the identity.

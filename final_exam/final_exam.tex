@@ -1,0 +1,49 @@
+\documentclass[11pt,oneside]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amssymb,parskip,mathtools,microtype}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bZ}{\mathbb{Z}}
+\newcommand*\colvec[1]{\begin{psmallmatrix}#1\end{psmallmatrix}}
+\newcommand*\dcolvec[1]{\begin{pmatrix}#1\end{pmatrix}}
+\newcommand{\extp}{\mathchoice{{\textstyle\bigwedge}}%
+    {{\bigwedge}}%
+    {{\textstyle\wedge}}%
+    {{\scriptstyle\wedge}}}
+
+\DeclareMathOperator{\Span}{span}
+\let\Re\relax
+\DeclareMathOperator{\Re}{Re}
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+
+\title{MATH2211 Spring 2022\\
+Final Exam}
+\author{Wednesday, April 20 2022}
+
+\begin{document}
+    \maketitle
+
+    Name: \underline{\hspace{6cm}}
+
+    This exam is open notes. There are 100 points total in this exam.
+
+    \begin{problem}
+        (10 points) Let $C(\bR)$ denote the space of continuous functions from $\bR$ to $\bR$. The Dirac delta distribution $\delta$ is an example of an element of $C(\bR)^*$ and is defined to be the linear functional on $C(\bR)$ sending a function $f\in C(\bR)$ to $f(0)$.
+
+        Let $f(x)=x^2+x+4$. Let $M_f\colon C(\bR)\to C(\bR)$ be the multiplication by $f$ operator, so $M_f(g)=(x^2+x+4)g$ for all $g\in C(\bR)$. Therefore, the transpose of $M_f$ is an operator $^tM_f\colon C(\bR)^*\to C(\bR)^*$. What is
+        \[^t M_f(\delta)?\]
+    \end{problem}
+
+    \begin{problem}
+        (10 points) Give an example of a non-diagonalizable $2\times 2$ 
+    \end{problem}
+    \vfill
+\end{document}
