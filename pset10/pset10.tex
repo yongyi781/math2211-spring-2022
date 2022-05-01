@@ -1,0 +1,79 @@
+\documentclass[11pt,oneside]{amsart}
+\usepackage{geometry}
+\usepackage{amssymb,parskip,mathtools,microtype}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bN}{\mathbb{N}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bZ}{\mathbb{Z}}
+\newcommand{\eps}{\varepsilon}
+\newcommand*\colvec[1]{\begin{psmallmatrix}#1\end{psmallmatrix}}
+\newcommand*\dcolvec[1]{\begin{pmatrix}#1\end{pmatrix}}
+
+\DeclareMathOperator{\Span}{span}
+\let\Re\relax
+\DeclareMathOperator{\Re}{Re}
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\rank}{rank}
+
+\title{MATH2211 Spring 2022\\
+Problem Set 10}
+\author{Due Friday, April 29, 2022 at 11:59 pm}
+
+\begin{document}
+    \maketitle
+
+    Relevant reading: Axler Chapter 6 and Section 7.A.
+
+    \begin{problem}
+        Let $V$ be a finite-dimensional inner product space and let $e_1,e_2,\dots,e_n$ be an orthonormal basis. Prove \emph{Parseval's Identity}: for all $x,y\in V$,
+        \[\langle x,y\rangle =\sum_{i=1}^n \langle x,e_i\rangle\langle e_i,y\rangle.\]
+    \end{problem}
+
+    \begin{problem}
+        \leavevmode\begin{enumerate}[(a)]
+            % \item First, a warm-up: Let $S,T,U$ be sets. Let $U^T$ denote the set of all functions from $T$ to $U$. Give a natural one-to-one correspondence between functions $S\times T\to U$ and functions $S\to U^T$. This is called ``currying'' in the context of functional programming.
+            \item Let $V$ be a real vector space and let $\langle\cdot,\cdot\rangle$ be a bilinear form on $V$. Prove that for every $v\in V$, the map $\varphi_{v}$ defined by $\varphi_v(x)=\langle v,x\rangle$ is a linear functional on $V$.
+            
+            Remark: This shows that, given a bilinear form on $V$, we get a natural map $\varphi$ from $V$ to $V^*$ sending each $v\in V$ to $\varphi_v$. The Riesz representation theorem says that if the bilinear form $\langle\cdot,\cdot\rangle$ is an inner product, then $\varphi\colon V\to V^*$ is an isomorphism. Moreover, in $\bR^n$ with the standard Euclidean inner product, $\varphi$ is exactly the map that turns a column vector into a row vector, which is classically denoted $\cdot^T$.
+            
+            \item Let's do a concrete example. Let $V=P_2(\bR)$ with inner product given by
+            \[\langle f,g\rangle=\int_0^1 f(x)g(x)\,dx.\]
+            Let $[x^2]$ denote the linear functional which when given a polynomial, returns its coefficient of the $x^2$ term. By the Riesz representation theorem, $[x^2]$ can be represented as $\langle f,\cdot\rangle$ for a unique polynomial $f\in P_2(\bR)$. Find $f$.
+        \end{enumerate}
+    \end{problem}
+    
+    \begin{problem}
+        Let $V$ be an inner product space and let $U$ be a subspace of $V$. In this problem we investigate the orthogonal projection operator $P_U$.
+        \begin{enumerate}[(a)]
+            \item Prove that $P_U^2=P_U$ and that $P_U$ is self-adjoint (that is, $P_U=P_U^*$). Show that the identity $P_U^2=P_U$ is equivalent to saying that $P_U|_{\im P_U}=I_{\im P_U}$. 
+            \item In this problem, suppose that $U=\Span(u)^\perp$ for some nonzero vector $u\in V$. Prove that $P_U$ can be expressed as $I-u\varphi_u$ (more classically denoted $I-uu^T$).
+            \item Prove that the eigenvalues of $P_U$ are 0 and 1, with the multiplicity of 1 being the dimension of $U$ and the multiplicity of 0 being the dimension of $U^\perp$.
+            \item Prove that the eigenspace of 1 of $P_U$ is $U$ and that the eigenspace of 0 is $U^\perp$, and that $P_U$ is diagonalizable.
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        Prove that if $T\colon V\to V$ is self-adjoint, then its eigenspaces corresponding to two different eigenvalues are orthogonal to each other.
+    \end{problem}
+
+    \begin{problem}
+        Let $A\in M_{m\times n}(\bR)$, and let $A^*$ denote the adjoint of $A$, namely the unique matrix in $M_{n\times m}(\bR)$ such that
+        \[\langle Ax,y\rangle=\langle x,A^*y\rangle\]
+        for all $x\in \bR^n, y\in\bR^m$.
+        \leavevmode\begin{enumerate}[(a)]
+            \item Prove that $\ker(A)=\ker(A^*A)$, where $A^*$ denotes the adjoint of $A$.
+            \item For a general matrix equation $Ax=b$, recall that there may be no solutions. Multiplying both sides on the left by $A^*$, we get the equation $A^*Ax=A^*b$. This is called the least squares normal equation for the matrix equation. It turns out that $A^*Ax=A^*b$ always has a solution, and that any solution $x$ to the normal equation minimizes the value of $\|Ax-b\|$.
+            
+            In this exercise, we prove this last part. Prove that if $x$ is a solution to the equation $A^*Ax=A^*b$, then the projection of $b$ onto the image of $A$ is equal to $Ax$. Show therefore that $\|Ax-b\|$ is minimized at those $x$ which solve $A^*Ax=A^*b$.
+        \end{enumerate}
+    \end{problem}
+\end{document}
