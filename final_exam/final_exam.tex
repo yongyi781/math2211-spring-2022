@@ -11,6 +11,7 @@
 \newcommand{\bQ}{\mathbb{Q}}
 \newcommand{\bR}{\mathbb{R}}
 \newcommand{\bZ}{\mathbb{Z}}
+\newcommand{\eps}{\varepsilon}
 \newcommand*\colvec[1]{\begin{psmallmatrix}#1\end{psmallmatrix}}
 \newcommand*\dcolvec[1]{\begin{pmatrix}#1\end{pmatrix}}
 \newcommand{\extp}{\mathchoice{{\textstyle\bigwedge}}%
@@ -23,6 +24,8 @@
 \DeclareMathOperator{\Re}{Re}
 \let\Im\relax
 \DeclareMathOperator{\Im}{Im}
+\let\tr\relax
+\DeclareMathOperator{\tr}{tr}
 
 \title{MATH2211 Spring 2022\\
 Final Exam}
@@ -36,14 +39,103 @@ Final Exam}
     This exam is open notes. There are 100 points total in this exam.
 
     \begin{problem}
-        (10 points) Let $C(\bR)$ denote the space of continuous functions from $\bR$ to $\bR$. The Dirac delta distribution $\delta$ is an example of an element of $C(\bR)^*$ and is defined to be the linear functional on $C(\bR)$ sending a function $f\in C(\bR)$ to $f(0)$.
-
-        Let $f(x)=x^2+x+4$. Let $M_f\colon C(\bR)\to C(\bR)$ be the multiplication by $f$ operator, so $M_f(g)=(x^2+x+4)g$ for all $g\in C(\bR)$. Therefore, the transpose of $M_f$ is an operator $^tM_f\colon C(\bR)^*\to C(\bR)^*$. What is
-        \[^t M_f(\delta)?\]
+        Let $M=\begin{pmatrix}
+            1&2&-1\\
+            0&4&1\\
+            2&-1&0
+        \end{pmatrix}$.
+        \begin{enumerate}[(a)]
+            \item (5 points) Solve the system
+            \[M\begin{pmatrix}
+                x\\y\\z
+            \end{pmatrix}=\begin{pmatrix}
+                a\\1\\0
+            \end{pmatrix}\]
+            in terms of $a$.
+            \vfill
+            \item (5 points) Find $\tr M$, $\det M$, and the characteristic polynomial of $M$.
+            \vfill
+        \end{enumerate}
     \end{problem}
-
+    \newpage
     \begin{problem}
-        (10 points) Give an example of a non-diagonalizable $2\times 2$ 
+        (10 points) For which $t\in\bR$ do the vectors
+        \[v_1=\dcolvec{1\\0\\t},\quad v_2=\dcolvec{t\\1\\1}, \quad v_3=\dcolvec{0\\1\\2}\]
+        form a basis of $\bR^3$?
     \end{problem}
     \vfill
+    \begin{problem}
+        (10 points) Show that every complex solution to $z^4+1=0$ also satisfies $z^{1200}=1$.
+    \end{problem}
+    \vfill
+    \newpage
+    \begin{problem}
+        % (10 points) Let $V$ be a finite dimensional $\bF_2$-vector space. Prove that the number of elements in $V$ is a power of 2 (i.e.\ $2^k$ for some non-negative integer $k$).
+
+        % Hint: Use a basis of $V$.
+        (10 points) Find the inverse of the linear operator $T\colon \bC^3\to\bC^3$ given by
+        \[T(x,y,z)=(x+y,x+z,y+z),\]
+        or prove that no such inverse exists.
+    \end{problem}
+    \vfill
+    \newpage
+    \begin{problem}
+        (10 points) Find a basis of eigenvectors for the matrix
+        \[\begin{pmatrix}0&0&1\\1&0&0\\0&1&0\end{pmatrix}.\]
+        Hint: It will be helpful to let $\zeta=e^{2\pi i/3}$. (Make use of the zeta drawing skills you learned in class!)
+    \end{problem}
+    \vfill
+    \newpage
+    \begin{problem}
+        (10 points) Let $X$ be a $2\times 2$ real matrix with trace 0 and rank 1. Prove that all the eigenvalues of $X$ are 0.
+    \end{problem}
+    \vfill
+    \newpage
+    \begin{problem}
+        Let $V=C([0,1],\bR)$ be the space of continuous functions from $[0,1]$ to $\bR$. The integral operator $I$ defined by
+        \[(I(f))(x)=\int_0^x f(t)\,dt\]
+        is a linear operator on $V$.
+        \begin{enumerate}[(a)]
+            \item (5 points) Prove that $I$ is not surjective.
+            \vfill
+            \item (5 points) What is $(^tI)(\delta)$, where $\delta$ is the Dirac delta functional?
+            \vfill
+        \end{enumerate}
+    \end{problem}
+    \newpage
+    \begin{problem}
+        Let $n$ be a positive integer. For any matrix $C\in M_n(\bR)$, let $V_C$ be the set of all $n\times n$ matrices $A\in M_n(\bR)$ such that $AC=CA$.
+        \begin{enumerate}[(a)]
+            \item (5 points) Prove that $V_C$ is a subspace of $M_n(\bR)$.
+            \vfill
+            \item (5 points) Prove that $\dim V_C\geq 2$ for all $C\in M_n(\bR)$.
+
+            Hint: Consider the case when $C$ is a scalar matrix and the case when $C$ is not a scalar matrix separately. In the latter case, try to come up with two linearly dependent matrices in $V_C$.
+            \vfill
+        \end{enumerate}
+    \end{problem}
+    \newpage
+    \begin{problem}
+        Find a counterexample to the following (reasonable-sounding) claim: If $P$ and $Q$ are orthogonal projection operators, then $PQ$ is also an orthogonal projection operator.
+    \end{problem}
+    \newpage
+    % \begin{problem}
+    %     (10 points) Let $C(\bR)$ denote the space of continuous functions from $\bR$ to $\bR$. Let $\varphi\colon C(\bR)\to C(\bR)$ be the linear map sending an element $f(x)\in C(\bR)$ to $(x^2+x+4)\cdot f(x)$. Prove that
+    %     \[(^t \varphi)(\delta)=4\delta,\]
+    %     where $\delta$ is the Dirac delta functional sending $f\in C(\bR)$ to $f(0)$.
+
+    %     Hint: Follow your nose carefully through the definitions.
+    % \end{problem}
+    
+    \begin{problem}
+        \leavevmode\begin{enumerate}[(a)]
+            \item (5 points) Let $e_1\dots e_n$ be an orthonormal basis of an inner product space $V$. Prove that the functionals $\eps_i\in V^*$ defined by
+            \[\eps_i(x)=\langle x, e_i\rangle, \quad 1\leq i\leq n,\]
+            are precisely the dual basis of $e_1,\dots,e_n$.
+            \vfill
+
+            \item (5 points) Suppose now that $e_1,\dots,e_n$ is only an orthogonal basis, meaning that $\langle e_i,e_j\rangle=0$ for $i\neq j$, but the $\|e_i\|$ are not necessarily equal to 1. For each $i$, let $\ell_i=\|e_i\|$, the length of $e_i$. Find the dual basis to $e_1,\dots,e_n$, in terms of the $\eps_i$ defined in part (a) as well as the $\ell_i$.
+            \vfill
+        \end{enumerate}
+    \end{problem}
 \end{document}
