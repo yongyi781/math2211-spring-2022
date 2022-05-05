@@ -1,0 +1,155 @@
+\documentclass[11pt,oneside]{amsart}
+\usepackage{geometry}
+\usepackage{amssymb,parskip,mathtools,microtype}
+\usepackage[shortlabels]{enumitem}
+\usepackage[most]{tcolorbox}
+
+\definecolor{sol}{rgb}{0.1, 0.3, 0.6}
+
+\newtcolorbox{solution}{enhanced, breakable, colframe=sol, title=Solution}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bN}{\mathbb{N}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bZ}{\mathbb{Z}}
+\newcommand{\eps}{\varepsilon}
+\newcommand*\colvec[1]{\begin{psmallmatrix}#1\end{psmallmatrix}}
+\newcommand*\dcolvec[1]{\begin{pmatrix}#1\end{pmatrix}}
+\newcommand{\innerprod}[1]{\left\langle#1\right\rangle}
+
+\DeclareMathOperator{\Span}{span}
+\let\Re\relax
+\DeclareMathOperator{\Re}{Re}
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\rank}{rank}
+
+\title{MATH2211 Spring 2022\\
+Problem Set 10}
+\author{Due Friday, April 29, 2022 at 11:59 pm}
+
+\begin{document}
+    \maketitle
+
+    Relevant reading: Axler Chapter 6 and Section 7.A.
+
+    \begin{problem}
+        Let $V$ be a finite-dimensional inner product space and let $e_1,e_2,\dots,e_n$ be an orthonormal basis. Prove \emph{Parseval's Identity}: for all $x,y\in V$,
+        \[\innerprod{x,y} =\sum_{i=1}^n \innerprod{x,e_i}\innerprod{e_i,y}.\]
+    \end{problem}
+    \begin{solution}
+        Write $x=\sum_{i=1}^n \innerprod{x,e_i} e_i$ and $y=\sum_{i=1}^n \innerprod{y,e_i} e_i$. Then
+        \[\begin{split}
+            \innerprod{x,y} &= \sum_{i=1}^n\sum_{j=1}^n\innerprod{\innerprod{x,e_i} e_i,\innerprod{y,e_j} e_j}\\
+            &= \sum_{i=1}^n\sum_{j=1}^n\innerprod{x,e_i}\overline{\innerprod{y,e_j}}\innerprod{e_i,e_j}\\
+            &= \sum_{i=1}^n\innerprod{x,e_i}\innerprod{e_i,y}.
+        \end{split}\]
+    \end{solution}
+
+    \begin{problem}
+        \leavevmode\begin{enumerate}[(a)]
+            % \item First, a warm-up: Let $S,T,U$ be sets. Let $U^T$ denote the set of all functions from $T$ to $U$. Give a natural one-to-one correspondence between functions $S\times T\to U$ and functions $S\to U^T$. This is called ``currying'' in the context of functional programming.
+            \item Let $V$ be a real vector space and let $\langle\cdot,\cdot\rangle$ be a bilinear form on $V$. Prove that for every $v\in V$, the map $\varphi_{v}$ defined by $\varphi_v(x)=\innerprod{v,x}$ is a linear functional on $V$.
+            
+            Remark: This shows that, given a bilinear form on $V$, we get a natural map $\varphi$ from $V$ to $V^*$ sending each $v\in V$ to $\varphi_v$. The Riesz representation theorem says that if the bilinear form $\langle\cdot,\cdot\rangle$ is an inner product, then $\varphi\colon V\to V^*$ is an isomorphism. Moreover, in $\bR^n$ with the standard Euclidean inner product, $\varphi$ is exactly the map that turns a column vector into a row vector, which is classically denoted $\cdot^T$.
+            \begin{solution}
+                We check that $\varphi_v$ is a linear map from $V$ to $\bR$. This follows from the bilinarity of the real inner product: for all $a,b\in \bR$ and $x_1,x_2\in V$,
+                \[\innerprod{v,ax_1+bx_2}=a\innerprod{v,x_1}+b\innerprod{v,x_2}.\]
+            \end{solution}
+            
+            \item Let's do a concrete example. Let $V=P_2(\bR)$ with inner product given by
+            \[\innerprod{f,g}=\int_0^1 f(x)g(x)\,dx.\]
+            Let $[x^2]$ denote the linear functional which when given a polynomial, returns its coefficient of the $x^2$ term. By the Riesz representation theorem, $[x^2]$ can be represented as $\innerprod{f,\cdot}$ for a unique polynomial $f\in P_2(\bR)$. Find $f$.
+            \begin{solution}
+                We need to find the unique polynomial $f\in P_2(\bR)$ such that
+                \begin{align*}
+                    \int_0^1 f(x)\cdot 1\,dx &= 0,\\
+                    \int_0^1 f(x)\cdot x\,dx &= 0,\\
+                    \int_0^1 f(x)\cdot x^2\,dx &= 1.
+                \end{align*}
+                If we write $f(x)=a+bx+cx^2$, this gives the equations
+                \begin{align*}
+                    a+\frac 12b+\frac13c &= 0,\\
+                    \frac12a+\frac13b+\frac14c &= 0,\\
+                    \frac13a+\frac14b+\frac15c &= 1.
+                \end{align*}
+                This can be solved using whatever method we like to obtain $f(x)=30-180x+180x^2$.
+            \end{solution}
+        \end{enumerate}
+    \end{problem}
+    
+    \begin{problem}
+        Let $V$ be an inner product space and let $U$ be a subspace of $V$. In this problem we investigate the orthogonal projection operator $P_U$.
+        \begin{enumerate}[(a)]
+            \item Prove that $P_U^2=P_U$ and that $P_U$ is self-adjoint (that is, $P_U=P_U^*$). Show that the identity $P_U^2=P_U$ is equivalent to saying that $P_U|_{\im P_U}=I_{\im P_U}$.
+            \begin{solution}
+                For any $v\in V$, write $v=u+w$ for $u\in U$ and $w\in U^\perp$. Then $P_U^2v=P_U(P_Uv)=P_Uu=u$, which is the same as $P_Uv$.
+
+                Now let us prove self-adjointness of $P_U$. Let $v=u+w$ and $v'=u'+w'$ be decompositions of two arbitrary vectors $v$ and $v'$ into components in $U$ and $U^\perp$. Then
+                \[\innerprod{Pv,v'}=\innerprod{u,v'}=\innerprod{u,u'+w'}=\innerprod{u,u'}\]
+                and
+                \[\innerprod{v,Pv'}=\innerprod{v,u'}=\innerprod{u+w,u'}=\innerprod{u,u'}\]
+                as well. Therefore, $\innerprod{Pv,v'}=\innerprod{v,Pv'}$ which shows that $P$ is self-adjoint.
+            \end{solution}
+            \item In this problem, suppose that $U=\Span(u)^\perp$ for some nonzero vector $u\in V$. Prove that $P_U$ can be expressed as $I-u\varphi_u$ (more classically denoted $I-uu^T$).
+            \begin{solution}
+                Oops, this problem needs $u$ to be a unit vector, and I didn't state that. The correct expression in the general case is $I-\frac{u\varphi_u}{\|u\|^2}$.
+
+                We saw in class that the projection onto the line spanned by $u$ can be given by the formula
+                \[P_uv=\frac{\innerprod{v,u}}{\innerprod{u,u}}u.\]
+                For simplicitly let us assume $\langle u,u\rangle=1$, i.e.\ $u$ is a unit vector. So then $P_uv=\langle v,u\rangle u=\varphi_u(v)\cdot u=u\varphi_u(v)$. (If $u$ is not a unit vector, $P_uv$ is equal to $u\varphi_u(v)/\|u\|^2$.) The residual vector $v-P_uv$ is precisely the projection of $v$ onto $\Span(u)^\perp$. Therefore, the projection onto $\Span(u)^\perp$ is given by $I-u\varphi_u$.
+            \end{solution}
+            \item Prove that the eigenvalues of $P_U$ are 0 and 1, with the multiplicity of 1 being the dimension of $U$ and the multiplicity of 0 being the dimension of $U^\perp$.
+            \begin{solution}
+                Let $u_1,\dots, u_r$ be any basis of $U$ where $r=\dim U$, and let $w_1,\dots, w_m$ be any basis of $U^\perp$, where $m=\dim U^\perp$. Together these vectors form a basis of $V$. We have $Pu_i=u_i$ for each $1\leq i\leq r$ and $Pw_i=0$ for each $1\leq i\leq m$, giving a basis of eigenvectors of $V$ where $r$ of them have eigenvalue 1 and $m$ of them have eigenvalue 0. This finishes the proof.
+            \end{solution}
+            \item Prove that the eigenspace of 1 of $P_U$ is $U$ and that the eigenspace of 0 is $U^\perp$, and that $P_U$ is diagonalizable.
+            \begin{solution}
+                The eigenspace of 1 is the kernel of $P_U-I$ or equivalently the kernel of $I-P_U$, which is just $P_{U^\perp}$. In any of these formulations it is clear the kernel is $U$ itself. Similarly, the eigenspace of 0 is the kernel of $P_U$, which is by definition $U^\perp$. Finally, since the two eigenspaces span $V$, $P_U$ is diagonalizable.
+            \end{solution}
+        \end{enumerate}
+    \end{problem}
+
+    \begin{problem}
+        Prove that if $T\colon V\to V$ is self-adjoint, then its eigenspaces corresponding to two different eigenvalues are orthogonal to each other.
+    \end{problem}
+    \begin{solution}
+        Let $\lambda_1\neq \lambda_2$ be two different eigenvalues and $v_1,v_2$ be two corresponding eigenvectors. Then
+        \[\lambda_1\innerprod{v_1,v_2}=\innerprod{Tv_1,v_2}=\innerprod{v_1,Tv_2}=\lambda_2\innerprod{v_1,v_2},\]
+        showing that $(\lambda_1-\lambda_2)\innerprod{v_1,v_2}=0$, which shows that $\innerprod{v_1,v_2}=0$.
+    \end{solution}
+
+    \begin{problem}
+        Let $A\in M_{m\times n}(\bR)$, and let $A^*$ denote the adjoint of $A$, namely the unique matrix in $M_{n\times m}(\bR)$ such that
+        \[\innerprod{Ax,y}=\innerprod{x,A^*y}\]
+        for all $x\in \bR^n, y\in\bR^m$.
+        \leavevmode\begin{enumerate}[(a)]
+            \item Prove that $\ker(A)=\ker(A^*A)$, where $A^*$ denotes the adjoint of $A$.
+            \begin{solution}
+                First, it is clear that if $Av=0$ then $A^*Av=0$ as well, so $\ker A\subseteq \ker(A^*A)$. Now let us suppose that $v\in \ker(A^*A)$, so $A^*Av=0$. Then
+                \[0=\innerprod{v,A^*Av}=\innerprod{Av,Av},\]
+                which implies that $Av=0$. Therefore, $\ker A\supseteq \ker(A^*A)$ as well.
+            \end{solution}
+            \item For a general matrix equation $Ax=b$, recall that there may be no solutions. Multiplying both sides on the left by $A^*$, we get the equation $A^*Ax=A^*b$. This is called the least squares normal equation for the matrix equation. It turns out that $A^*Ax=A^*b$ always has a solution, and that any solution $x$ to the normal equation minimizes the value of $\|Ax-b\|$.
+            
+            In this exercise, we prove this last part. Prove that if $x$ is a solution to the equation $A^*Ax=A^*b$, then the projection of $b$ onto the image of $A$ is equal to $Ax$. Show therefore that $\|Ax-b\|$ is minimized at those $x$ which solve $A^*Ax=A^*b$.
+            \begin{solution}
+                Showing that the projection of $b$ onto the image of $A$ is equal to $Ax$ is equivalent to showing that $Ax-b\perp(\im A)$, which is equivalent to
+                \[\innerprod{Ay,Ax-b}=0\]
+                for all $y\in V$. This is in turn equivalent to
+                \[\innerprod{y,A^*Ax-A^*b}=0\]
+                for all $y\in V$, which is equivalent to $A^*Ax-A^*b=0$. Therefore, if $x$ is a solution to $A^*Ax=A^*b$, then $Ax-b\perp(\im A)$, which is what we wanted to prove.
+
+                Since we have proven that $P_{\im A}b=Ax$, let us write $b=Ax+w$ for some $w\in(Ax)^\perp$. Now let $x'$ be any other vector in $V$. Then
+                \[\|Ax'-b\|^2=\|Ax'-Ax-w\|^2=\|A(x'-x)\|^2+\|w\|^2\]
+                by the Pythagorean theorem, using the fact that $w\perp A(x'-x)$ since $A(x'-x)\in\im A$. Since $w$ does not depend on $x'$, the value of $\|A(x'-x)\|^2+\|w\|^2$ is minimized when $A(x'-x)=0$, which is equivalent to saying that $Ax'=Ax=b$.
+            \end{solution}
+        \end{enumerate}
+    \end{problem}
+\end{document}
