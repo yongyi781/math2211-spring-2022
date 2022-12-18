@@ -3,6 +3,4 @@
 *.out
 *.synctex.gz
 
-*.pdf
-!*_solutions.pdf
 !LinearAlgebraNotes.pdf
