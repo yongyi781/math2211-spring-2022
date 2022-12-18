@@ -1,0 +1,96 @@
+\documentclass[11pt,oneside]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amssymb,parskip,mathtools,microtype,xcolor}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bZ}{\mathbb{Z}}
+\newcommand*\colvec[1]{\begin{psmallmatrix}#1\end{psmallmatrix}}
+\newcommand*\dcolvec[1]{\begin{pmatrix}#1\end{pmatrix}}
+\newcommand{\extp}{\mathchoice{{\textstyle\bigwedge}}%
+    {{\bigwedge}}%
+    {{\textstyle\wedge}}%
+    {{\scriptstyle\wedge}}}
+
+\DeclareMathOperator{\Span}{span}
+\let\Re\relax
+\DeclareMathOperator{\Re}{Re}
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+
+\title{MATH2211 Spring 2022\\
+Exam 2}
+\author{Wednesday, April 20 2022}
+
+\definecolor{maroon}{RGB}{204,0,0}
+
+\begin{document}
+    \maketitle
+
+    Name: \underline{\hspace{6cm}}
+
+    This exam is open notes. There are 50 points total in this exam.
+
+    {\color{maroon}
+    High 46/50, low 15.5/50, mean 33.3/50, median 34.5/50. Good exam. This exam was tougher than the first exam. Every problem was fully solved by at least one student, however. The hardest problem was problem 5, with average points obtained being 41\%. The next hardest was 4(a), with average points obtained being 54\%.
+
+    It is also worth noting that Problem 5 was essentially done in the intro to eigenvalues lecture, albeit with a different matrix. However, the presentation of the result here as an explicit limit (which wasn't done in lecture) may have thrown most students off.
+    }
+
+    \begin{problem}
+        Let $A=\begin{pmatrix}
+            -1&2\\
+            3&-1
+        \end{pmatrix}$.
+        \begin{enumerate}[(a)]
+            \item (5 points) Find an elementary matrix $E$ such that $EA$ is upper triangular.
+            \vfill
+            \item (5 points) Give a basis of $\extp^2\bR^2$ and write the matrix of the linear operator
+            \[\extp^2 A\colon \extp^2 \bR^2\to \extp^2\bR^2\]
+            in this basis.
+            \vfill
+        \end{enumerate}
+    \end{problem}
+    
+
+    \begin{problem}
+       (10 points) The \emph{right shift} operator $T\colon \bR^\infty\to\bR^\infty$ is defined by
+       \[T(a_0,a_1,a_2,\dots)=(0,a_0,a_1,a_2,\dots).\]
+       What are the eigenvalues and eigenvectors of $T$?
+    \end{problem}
+    
+
+    \begin{problem}
+        (10 points) Prove that if $T\colon V\to V$ is diagonalizable, then $T^2+T+I_V$ is also diagonalizable.
+
+        Hint: Eigenvectors.
+    \end{problem}
+    \vfill
+    
+
+    \begin{problem}
+        Let $A$ be a $50\times 100$ real matrix whose kernel is 74-dimensional.
+       \begin{enumerate}[(a)]
+           \item (5 points) What is the dimension of the space of row vectors $y$ such that $yA=0$?
+           \vfill
+           \item (5 points) Suppose you know that the vector $\colvec{1\\1\\\vdots\\1}\in \bR^{100}$ is in the kernel of $A$. This implies that every row vector $(y_1\ y_2\ \cdots\ y_{100})$ in the image of $^tA$ satisfies some condition. What is this condition? Prove your answer.
+           \vfill
+       \end{enumerate}
+    \end{problem}
+    
+
+    \begin{problem}
+        (10 points) Let $M=\begin{pmatrix}
+            1&3\\1&1
+        \end{pmatrix}$.
+        For $n\geq 0$, let $a_n$ be the top left entry of $M^n$. Prove that
+        \[\lim_{n\to\infty}\frac{a_n}{(1+\sqrt3)^n}=\frac 12.\]
+    \end{problem}
+    \vfill
+\end{document}

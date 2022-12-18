@@ -1,6 +1,6 @@
 \documentclass[11pt,oneside]{amsart}
 \usepackage[margin=1in]{geometry}
-\usepackage{amssymb,parskip,mathtools,microtype}
+\usepackage{amssymb,parskip,mathtools,microtype,xcolor}
 \usepackage[shortlabels]{enumitem}
 
 \theoremstyle{definition}
@@ -31,12 +31,22 @@
 Final Exam}
 \author{Friday, May 13 2022}
 
+\definecolor{maroon}{RGB}{204,0,0}
+
 \begin{document}
     \maketitle
 
     Name: \underline{\hspace{6cm}}
 
     This exam is open notes, and the time limit is 3 hours. There are 100 points total in this exam.
+
+    {\color{maroon}
+    High 87, low 39, mean 70.15, median 71. Good exam. The intended structure was that the first 5 problems were standard linear algebra problems, while the last 5 required at least one step of original thought. The scores reflected this quite well; average score across problems 1 to 5 was 85.5\%, while average score across problems 6 to 10 was 54.8\%. The hardest problems were 7(a), 7(b), 8(b), 9, and 10(b), with average points obtained being 43\%, 44\%, 39\%, 43\%, and 50\%. It also turned out that 8(a) and 10(a) from the second half of the exam were quite easy; average score on those was 80\%.
+
+    The top score on problem 9 was 6/10, which means that the problem should have a substantial hint in the future.
+
+    Nobody got full points on problem 8(b), despite the extensive hint. Two people came close, saying that $I$ and $C^{-1}$ are both in $V_C$. The issue is of course that $C^{-1}$ does not always exist, and they should have used $C$ instead of $C^{-1}$.
+    }
 
     \begin{problem}
         Let $M=\begin{pmatrix}
@@ -57,7 +67,7 @@ Final Exam}
             \vfill
         \end{enumerate}
     \end{problem}
-    \newpage
+    
     \begin{problem}
         (10 points) For which $t\in\bR$ do the vectors
         \[v_1=\dcolvec{1\\0\\t},\quad v_2=\dcolvec{t\\1\\1}, \quad v_3=\dcolvec{0\\1\\2}\]
@@ -68,7 +78,7 @@ Final Exam}
         (10 points) Show that every complex solution to $z^4+1=0$ also satisfies $z^{1200}=1$.
     \end{problem}
     \vfill
-    \newpage
+    
     \begin{problem}
         % (10 points) Let $V$ be a finite dimensional $\bF_2$-vector space. Prove that the number of elements in $V$ is a power of 2 (i.e.\ $2^k$ for some non-negative integer $k$).
 
@@ -78,19 +88,19 @@ Final Exam}
         or prove that no such inverse exists.
     \end{problem}
     \vfill
-    \newpage
+    
     \begin{problem}
         (10 points) Find a basis of eigenvectors for the matrix
         \[\begin{pmatrix}0&0&1\\1&0&0\\0&1&0\end{pmatrix}.\]
         Hint: It will be helpful to let $\zeta=e^{2\pi i/3}$. (Make use of the zeta drawing skills you learned in class!)
     \end{problem}
     \vfill
-    \newpage
+    
     \begin{problem}
         (10 points) Let $X$ be a $2\times 2$ real matrix with trace 0 and rank 1. Prove that $X$ only has 0 as an eigenvalue.
     \end{problem}
     \vfill
-    \newpage
+    
     \begin{problem}
         Let $V=C([0,1],\bR)$ be the space of continuous functions from $[0,1]$ to $\bR$. The integral operator $I$ defined by
         \[(I(f))(x)=\int_0^x f(t)\,dt\]
@@ -104,7 +114,7 @@ Final Exam}
             \vfill
         \end{enumerate}
     \end{problem}
-    \newpage
+    
     \begin{problem}
         Let $n\geq 2$ be a positive integer. For any matrix $C\in M_n(\bR)$, let $V_C$ be the set of all $n\times n$ matrices $A\in M_n(\bR)$ such that $AC=CA$.
         \begin{enumerate}[(a)]
@@ -116,11 +126,11 @@ Final Exam}
             \vfill
         \end{enumerate}
     \end{problem}
-    \newpage
+    
     \begin{problem}
         (10 points) Find a counterexample to the following (reasonable-sounding) claim: If $P$ and $Q$ are orthogonal projection operators, then $PQ$ is also an orthogonal projection operator.
     \end{problem}
-    \newpage
+    
     % \begin{problem}
     %     (10 points) Let $C(\bR)$ denote the space of continuous functions from $\bR$ to $\bR$. Let $\varphi\colon C(\bR)\to C(\bR)$ be the linear map sending an element $f(x)\in C(\bR)$ to $(x^2+x+4)\cdot f(x)$. Prove that
     %     \[(^t \varphi)(\delta)=4\delta,\]
